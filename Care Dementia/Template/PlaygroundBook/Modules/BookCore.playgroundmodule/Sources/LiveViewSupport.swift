@@ -18,7 +18,7 @@ public func instantiateLiveView() -> PlaygroundLiveViewable {
         fatalError("LiveView.storyboard does not have an initial scene; please set one or update this function")
     }
 
-    guard let liveViewController = viewController as? LiveViewController else {
+    guard let liveViewController = viewController as? MainViewController else {
         fatalError("LiveView.storyboard's initial scene is not a LiveViewController; please either update the storyboard or this function")
     }
 
