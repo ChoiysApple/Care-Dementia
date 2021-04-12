@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Book Core Live View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="HVS-ZB-wEb">
             <objects>
-                <viewController id="fcD-sv-Xiz" customClass="BookCore_LiveViewController" sceneMemberID="viewController">
+                <viewController id="fcD-sv-Xiz" customClass="MainViewController" customModule="BookCore" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rh2-0a-zph">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,21 +23,55 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52Z-KP-MKO">
+                                <rect key="frame" x="164.5" y="485.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="7sv-FQ-GAe" kind="show" id="Lau-WY-mJe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qaR-nP-dw0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h6a-7e-CMz" firstAttribute="centerX" secondItem="Rh2-0a-zph" secondAttribute="centerX" id="DgE-dK-YaV"/>
+                            <constraint firstItem="52Z-KP-MKO" firstAttribute="centerY" secondItem="Rh2-0a-zph" secondAttribute="centerY" multiplier="1.5" id="IWe-uE-fAk"/>
+                            <constraint firstItem="52Z-KP-MKO" firstAttribute="centerX" secondItem="Rh2-0a-zph" secondAttribute="centerX" id="VCY-dF-C5a"/>
                             <constraint firstItem="h6a-7e-CMz" firstAttribute="centerY" secondItem="Rh2-0a-zph" secondAttribute="centerY" id="rsb-9d-7m1"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label" destination="h6a-7e-CMz" id="hUr-Py-MJd"/>
+                        <outlet property="label" destination="h6a-7e-CMz" id="VdD-kx-cmS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvi-wC-fap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247" y="96"/>
+            <point key="canvasLocation" x="-254" y="81"/>
+        </scene>
+        <!--Importance View Controller-->
+        <scene sceneID="WuG-N6-7Fx">
+            <objects>
+                <viewController id="7sv-FQ-GAe" customClass="ImportanceViewController" customModule="BookCore" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aey-wd-anB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="page2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJL-Fj-baF">
+                                <rect key="frame" x="163" y="323" width="48" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ary-Rc-lle"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SZU-Gh-KFX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qs0-TF-UOA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="599" y="81"/>
         </scene>
     </scenes>
     <resources>
