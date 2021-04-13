@@ -19,15 +19,9 @@ class FirstViewController: UIViewController {
     override func loadView() {
         let view = UIView(frame: viewRect)
         view.backgroundColor = customColor.main
-        
-        
-        // Title
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = descriptions.title_heading
-        titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
-        
+
+        // title
+        let titleLabel = addHeading()
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -51,14 +45,9 @@ class FirstViewController: UIViewController {
         ])
         
         // button
-        let nextButton = UIButton()
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let nextButton = addButton()
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
-        nextButton.setTitle(descriptions.title_button, for: .normal)
-        nextButton.setTitleColor(UIColor.white, for: .normal)
-        nextButton.backgroundColor = customColor.tint
-        nextButton.layer.cornerRadius = 10
-        
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 100),
@@ -85,29 +74,17 @@ class SecondViewController: UIViewController {
         view.backgroundColor = customColor.main
         
         // Title
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = descriptions.introduction_title
-        titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
-        
+        let titleLabel = addHeading()
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-        // Title
-        let descriptionLabel = UILabel()
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.text = descriptions.introduction_description
-        descriptionLabel.textColor = UIColor.black
-        descriptionLabel.numberOfLines = 0
-        
+
+        // Description
+        let descriptionLabel = addDescription()
         view.addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
-//            descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 80),
-//            descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 80),
             descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -118,8 +95,35 @@ class SecondViewController: UIViewController {
     }
 }
 
+func addHeading() -> UILabel{
+    let titleLabel = UILabel()
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.text = descriptions.title_heading
+    titleLabel.textColor = UIColor.black
+    titleLabel.font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+    
+    return titleLabel
+}
 
+func addButton() -> UIButton {
+    let nextButton = UIButton()
+    nextButton.translatesAutoresizingMaskIntoConstraints = false
+    nextButton.setTitle(descriptions.title_button, for: .normal)
+    nextButton.setTitleColor(UIColor.white, for: .normal)
+    nextButton.backgroundColor = customColor.tint
+    nextButton.layer.cornerRadius = 10
+    return nextButton
+}
 
+func addDescription() -> UILabel {
+    let descriptionLabel = UILabel()
+    descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+    descriptionLabel.text = descriptions.introduction_description
+    descriptionLabel.textColor = UIColor.black
+    descriptionLabel.numberOfLines = 0
+    
+    return descriptionLabel
+}
 
 
 
