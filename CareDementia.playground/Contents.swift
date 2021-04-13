@@ -202,7 +202,7 @@ func addHeading(_ title: String) -> UILabel{
 func addEmoji(_ emoji: String, _ size: Float) -> UILabel {
     let centerEmoji = UILabel()
     centerEmoji.translatesAutoresizingMaskIntoConstraints = false
-    centerEmoji.text = descriptions.title_emoji
+    centerEmoji.text = emoji
     centerEmoji.textAlignment = .center
     centerEmoji.font = UIFont.systemFont(ofSize: 150)
     
