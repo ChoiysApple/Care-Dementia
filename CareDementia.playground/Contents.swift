@@ -17,25 +17,30 @@ PlaygroundPage.current.liveView = navVC.view
 class FirstViewController: UIViewController {
     
     override func loadView() {
-        let view = UIView(frame: viewRect)
-        view.backgroundColor = customColor.main
+        let view = addView()
 
         // title
         let titleLabel = addHeading(descriptions.title_heading)
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.heightAnchor.constraint(equalToConstant: 50),
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
+        
         // center Emoji
-        let centerEmoji = UILabel()
-        centerEmoji.translatesAutoresizingMaskIntoConstraints = false
-        centerEmoji.text = descriptions.title_emoji
-        centerEmoji.textAlignment = .center
-        centerEmoji.font = UIFont.systemFont(ofSize: 150)
-    
+        
+        let centerEmoji = addEmoji(descriptions.title_emoji, 150)
         view.addSubview(centerEmoji)
         NSLayoutConstraint.activate([
             centerEmoji.heightAnchor.constraint(equalToConstant: 300),
@@ -70,8 +75,7 @@ class FirstViewController: UIViewController {
 // Introduction Page
 class SecondViewController: UIViewController {
     override func loadView() {
-        let view = UIView(frame: viewRect)
-        view.backgroundColor = customColor.main
+        let view = addView()
         
         // Title
         let titleLabel = addHeading(descriptions.introduction_title)
@@ -92,17 +96,60 @@ class SecondViewController: UIViewController {
         ])
 
         // Description
-        let descriptionLabel = addDescription(descriptions.introduction_description)
-        view.addSubview(descriptionLabel)
+        let descriptionLabel1 = addDescription(descriptions.introduction_description1)
+        view.addSubview(descriptionLabel1)
         NSLayoutConstraint.activate([
-            descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            descriptionLabel1.widthAnchor.constraint(equalToConstant: 400),
+            descriptionLabel1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            descriptionLabel1.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        // Description
+        let descriptionLabel2 = addDescription(descriptions.introduction_description2)
+        view.addSubview(descriptionLabel2)
+        NSLayoutConstraint.activate([
+            descriptionLabel2.widthAnchor.constraint(equalToConstant: 400),
+            descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 50),
+            descriptionLabel2.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Button
+        let nextButton = addButton(descriptions.introduction_button)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 100),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         self.view = view
     }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let nextVC = ThirdViewController()
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+        
+}
+
+// Statistics Page
+class ThirdViewController: UIViewController {
+    
+    override func loadView() {
+        let view = addView()
+        
+        self.view = view
+    }
+}
+
+func addView() -> UIView {
+    let view = UIView(frame: viewRect)
+    view.backgroundColor = customColor.main
+    
+    return view
 }
 
 func addHeading(_ title: String) -> UILabel{
@@ -115,9 +162,19 @@ func addHeading(_ title: String) -> UILabel{
     return titleLabel
 }
 
+func addEmoji(_ emoji: String, _ size: Float) -> UILabel {
+    let centerEmoji = UILabel()
+    centerEmoji.translatesAutoresizingMaskIntoConstraints = false
+    centerEmoji.text = descriptions.title_emoji
+    centerEmoji.textAlignment = .center
+    centerEmoji.font = UIFont.systemFont(ofSize: 150)
+    
+    return centerEmoji
+}
+
 func addDivider() -> UIView{
     let divider = UIView()
-    divider.backgroundColor = UIColor.gray
+    divider.backgroundColor = UIColor.lightGray
     divider.translatesAutoresizingMaskIntoConstraints = false
 
     return divider
@@ -158,8 +215,10 @@ struct descriptions {
     static let title_button = "Should I?"
     
     static let introduction_title = "First, What is Dementia?"
-    static let introduction_description = "Dementia is collection of symptoms that are caused by disorders affecting the brain and impact on memory, thinking, behaviour and emotion."
-    static let introduction_button = ""
+    // Dememtia description from: https://www.alzint.org/about/
+    static let introduction_description1 = "Dementia is collection of symptoms that are caused by disorders affecting the brain and impact on memory, thinking, behaviour and emotion."
+    static let introduction_description2 = "The most common is Alzheimer’s disease, which affects 50-60% of people with dementia."
+    static let introduction_button = "Okay, I see"
 }
 
 
