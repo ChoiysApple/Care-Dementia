@@ -187,16 +187,19 @@ class ThirdViewController: UIViewController {
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-//        let contentView = UIView()
-//        contentView.backgroundColor = .white
-//        contentView.layer.cornerRadius = 10
-//        NSLayoutConstraint.activate([
-//            contentView.widthAnchor.constraint(equalToConstant: 400),
-//            contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
-//            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//        ])
-//
-//        // Statistics visual view
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 10
+        view.addSubview(contentView)
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalToConstant: 400),
+            contentView.heightAnchor.constraint(equalToConstant: 50),
+            contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+
+        // Statistics visual view
 //        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 //        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
 //        layout.itemSize = CGSize(width: 60, height: 60)
@@ -208,16 +211,16 @@ class ThirdViewController: UIViewController {
 //        collectionView?.dataSource = self
 //
 //        view.addSubview(collectionView ?? UICollectionView())
-//
-//
-//        let slider = UISlider()
-//        slider.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(slider)
-//        NSLayoutConstraint.activate([
-//            slider.widthAnchor.constraint(equalToConstant: 400),
-//            slider.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
-//            slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//        ])
+
+
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(slider)
+        NSLayoutConstraint.activate([
+            slider.widthAnchor.constraint(equalToConstant: 400),
+            slider.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
+            slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
         
         
         
