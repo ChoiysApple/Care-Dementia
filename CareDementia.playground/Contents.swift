@@ -1,3 +1,9 @@
+//
+//  CareDementia.playground
+//  Care Dementia
+//
+//  Created by Daegeon Choi
+
 import UIKit
 import PlaygroundSupport
 
@@ -39,7 +45,6 @@ class FirstViewController: UIViewController {
 
         
         // center Emoji
-        
         let centerEmoji = addEmoji(descriptions.title_emoji, 150)
         view.addSubview(centerEmoji)
         NSLayoutConstraint.activate([
@@ -94,13 +99,22 @@ class SecondViewController: UIViewController {
             divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-
+        
+        let centerEmoji = addEmoji(descriptions.introduciton_emoji, 100)
+        view.addSubview(centerEmoji)
+        NSLayoutConstraint.activate([
+            centerEmoji.heightAnchor.constraint(equalToConstant: 300),
+            centerEmoji.widthAnchor.constraint(equalToConstant: 300),
+            centerEmoji.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -10),
+            centerEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
         // Description
         let descriptionLabel1 = addDescription(descriptions.introduction_description1)
         view.addSubview(descriptionLabel1)
         NSLayoutConstraint.activate([
             descriptionLabel1.widthAnchor.constraint(equalToConstant: 400),
-            descriptionLabel1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            descriptionLabel1.topAnchor.constraint(equalTo: centerEmoji.bottomAnchor, constant: -40),
             descriptionLabel1.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -120,7 +134,7 @@ class SecondViewController: UIViewController {
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 100),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
+            nextButton.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 50),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -145,6 +159,29 @@ class ThirdViewController: UIViewController {
     }
 }
 
+
+// Constants
+struct customColor {
+    static let main = #colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
+    static let tint = #colorLiteral(red: 0.4470588235, green: 0.4392156863, blue: 0.4235294118, alpha: 1)
+}
+
+struct descriptions {
+    static let title_heading = "You should Care Dementia!"
+    static let title_emoji = "🧑‍⚕️"
+    static let title_button = "Should I?"
+    
+    static let introduction_title = "First, What is Dementia?"
+    static let introduciton_emoji = "🧠"
+    // Dememtia description from: https://www.alzint.org/about/
+    static let introduction_description1 = "Dementia is collection of symptoms that are caused by disorders affecting the brain and impact on memory, thinking, behaviour and emotion."
+    static let introduction_description2 = "The most common is Alzheimer’s disease, which affects 50-60% of people with dementia."
+    static let introduction_button = "Okay, I see"
+    
+    
+}
+
+//Custom Module for UI
 func addView() -> UIView {
     let view = UIView(frame: viewRect)
     view.backgroundColor = customColor.main
@@ -203,23 +240,7 @@ func addDescription(_ description: String) -> UILabel {
 
 
 
-// Constants
-struct customColor {
-    static let main = #colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
-    static let tint = #colorLiteral(red: 0.4470588235, green: 0.4392156863, blue: 0.4235294118, alpha: 1)
-}
 
-struct descriptions {
-    static let title_heading = "You should Care Dementia!"
-    static let title_emoji = "🧑‍⚕️"
-    static let title_button = "Should I?"
-    
-    static let introduction_title = "First, What is Dementia?"
-    // Dememtia description from: https://www.alzint.org/about/
-    static let introduction_description1 = "Dementia is collection of symptoms that are caused by disorders affecting the brain and impact on memory, thinking, behaviour and emotion."
-    static let introduction_description2 = "The most common is Alzheimer’s disease, which affects 50-60% of people with dementia."
-    static let introduction_button = "Okay, I see"
-}
 
 
 
