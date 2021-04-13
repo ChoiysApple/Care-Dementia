@@ -2,7 +2,7 @@
 //  CareDementia.playground
 //  Care Dementia
 //
-//  Created by Daegeon Choi
+//  Created by Daegun Choi
 
 import UIKit
 import PlaygroundSupport
@@ -67,7 +67,7 @@ class FirstViewController: UIViewController {
         ])
         
         self.view = view
-    }
+    }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
         let nextVC = SecondViewController()
@@ -75,7 +75,7 @@ class FirstViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-}
+}   // [END] of ThirdViewController
 
 // Introduction Page
 class SecondViewController: UIViewController {
@@ -139,7 +139,7 @@ class SecondViewController: UIViewController {
         ])
         
         self.view = view
-    }
+    }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
         let nextVC = ThirdViewController()
@@ -147,10 +147,14 @@ class SecondViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
         
-}
+}   // [END] of SecondViewController
+
+
 
 // Statistics Page
 class ThirdViewController: UIViewController {
+    
+    var collectionView: UICollectionView?
     
     override func loadView() {
         let view = addView()
@@ -160,7 +164,7 @@ class ThirdViewController: UIViewController {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.widthAnchor.constraint(equalToConstant: 400),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -174,11 +178,96 @@ class ThirdViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-       
+        // Description
+        let descriptionLabel = addDescription(descriptions.statistics_description)
+        view.addSubview(descriptionLabel)
+        NSLayoutConstraint.activate([
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
+            descriptionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+//        let contentView = UIView()
+//        contentView.backgroundColor = .white
+//        contentView.layer.cornerRadius = 10
+//        NSLayoutConstraint.activate([
+//            contentView.widthAnchor.constraint(equalToConstant: 400),
+//            contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+//            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//        ])
+//
+//        // Statistics visual view
+//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+//        layout.itemSize = CGSize(width: 60, height: 60)
+//
+//        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+//        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+//        collectionView?.backgroundColor = UIColor.white
+//
+//        collectionView?.dataSource = self
+//
+//        view.addSubview(collectionView ?? UICollectionView())
+//
+//
+//        let slider = UISlider()
+//        slider.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(slider)
+//        NSLayoutConstraint.activate([
+//            slider.widthAnchor.constraint(equalToConstant: 400),
+//            slider.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
+//            slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//        ])
+        
+        
+        
+        // Button
+        let nextButton = addButton(descriptions.statistics_button)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 150),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         self.view = view
+    }   // [END] of loadView
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let nextVC = ThirdViewController()
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    
+
+    
+}   // [END] of ThirdViewController
+
+extension ThirdViewController: UICollectionViewDataSource {
+   // CollectionView DataSource Protocol stubs
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return 2
+   }
+
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+       cell.backgroundColor = UIColor.blue
+
+       return cell
+   }
 }
+
+class FourthViewController: UIViewController {
+    
+    override func loadView() {
+        let view = addView()
+
+        self.view = view
+    }   // [END] of loadView
+}   // [END] of ThirdViewController
 
 
 // Constants
@@ -200,8 +289,8 @@ struct descriptions {
     static let introduction_button = "Okay, I see"
     
     static let statistics_title = "You might think Dementia is not common thing"
-    static let statistics_description = ""
-    static let statistics_button = ""
+    static let statistics_description = "How many people get Dementia by getting old?"
+    static let statistics_button = "But I'm not old"
     
     
 }
