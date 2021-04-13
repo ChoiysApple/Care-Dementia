@@ -21,7 +21,7 @@ class FirstViewController: UIViewController {
         view.backgroundColor = customColor.main
 
         // title
-        let titleLabel = addHeading()
+        let titleLabel = addHeading(descriptions.title_heading)
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -46,7 +46,7 @@ class FirstViewController: UIViewController {
         
         // button
 
-        let nextButton = addButton()
+        let nextButton = addButton(descriptions.title_button)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
@@ -74,15 +74,25 @@ class SecondViewController: UIViewController {
         view.backgroundColor = customColor.main
         
         // Title
-        let titleLabel = addHeading()
+        let titleLabel = addHeading(descriptions.introduction_title)
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
 
         // Description
-        let descriptionLabel = addDescription()
+        let descriptionLabel = addDescription(descriptions.introduction_description)
         view.addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
@@ -95,30 +105,39 @@ class SecondViewController: UIViewController {
     }
 }
 
-func addHeading() -> UILabel{
+func addHeading(_ title: String) -> UILabel{
     let titleLabel = UILabel()
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.text = descriptions.title_heading
+    titleLabel.text = title
     titleLabel.textColor = UIColor.black
     titleLabel.font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
     
     return titleLabel
 }
 
-func addButton() -> UIButton {
+func addDivider() -> UIView{
+    let divider = UIView()
+    divider.backgroundColor = UIColor.gray
+    divider.translatesAutoresizingMaskIntoConstraints = false
+
+    return divider
+}
+
+func addButton(_ button: String) -> UIButton {
     let nextButton = UIButton()
     nextButton.translatesAutoresizingMaskIntoConstraints = false
-    nextButton.setTitle(descriptions.title_button, for: .normal)
+    nextButton.setTitle(button, for: .normal)
     nextButton.setTitleColor(UIColor.white, for: .normal)
     nextButton.backgroundColor = customColor.tint
     nextButton.layer.cornerRadius = 10
+    
     return nextButton
 }
 
-func addDescription() -> UILabel {
+func addDescription(_ description: String) -> UILabel {
     let descriptionLabel = UILabel()
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-    descriptionLabel.text = descriptions.introduction_description
+    descriptionLabel.text = description
     descriptionLabel.textColor = UIColor.black
     descriptionLabel.numberOfLines = 0
     
