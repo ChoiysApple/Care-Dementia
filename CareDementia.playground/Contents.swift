@@ -154,9 +154,9 @@ class SecondViewController: UIViewController {
 // Statistics Page
 class ThirdViewController: UIViewController {
     
-    var collectionView: UICollectionView?
-    
-    override func loadView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let view = addView()
         
         // title
@@ -194,23 +194,23 @@ class ThirdViewController: UIViewController {
         view.addSubview(contentView)
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalToConstant: 400),
-            contentView.heightAnchor.constraint(equalToConstant: 50),
+            contentView.heightAnchor.constraint(equalToConstant: 10),
             contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
 
         // Statistics visual view
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-//        layout.itemSize = CGSize(width: 60, height: 60)
-//
-//        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-//        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-//        collectionView?.backgroundColor = UIColor.white
-//
-//        collectionView?.dataSource = self
-//
-//        view.addSubview(collectionView ?? UICollectionView())
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 30, height: 30)
+
+        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.backgroundColor = UIColor.white
+
+        collectionView.dataSource = self
+
+        contentView.addSubview(collectionView)
 
 
         let slider = UISlider()
@@ -221,8 +221,6 @@ class ThirdViewController: UIViewController {
             slider.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
             slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        
-        
         
         // Button
         let nextButton = addButton(descriptions.statistics_button)
@@ -239,7 +237,7 @@ class ThirdViewController: UIViewController {
     }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = ThirdViewController()
+        let nextVC = FourthViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -249,10 +247,11 @@ class ThirdViewController: UIViewController {
     
 }   // [END] of ThirdViewController
 
+// Collection View Data Source
 extension ThirdViewController: UICollectionViewDataSource {
    // CollectionView DataSource Protocol stubs
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+       return 16
    }
 
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
