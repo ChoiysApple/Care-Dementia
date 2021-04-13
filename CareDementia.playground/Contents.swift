@@ -155,6 +155,27 @@ class ThirdViewController: UIViewController {
     override func loadView() {
         let view = addView()
         
+        // title
+        let titleLabel = addHeading(descriptions.statistics_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+       
+        
         self.view = view
     }
 }
@@ -178,10 +199,14 @@ struct descriptions {
     static let introduction_description2 = "The most common is Alzheimer’s disease, which affects 50-60% of people with dementia."
     static let introduction_button = "Okay, I see"
     
+    static let statistics_title = "You might think Dementia is not common thing"
+    static let statistics_description = ""
+    static let statistics_button = ""
+    
     
 }
 
-//Custom Module for UI
+//Custom functions for UI
 func addView() -> UIView {
     let view = UIView(frame: viewRect)
     view.backgroundColor = customColor.main
@@ -193,6 +218,7 @@ func addHeading(_ title: String) -> UILabel{
     let titleLabel = UILabel()
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.text = title
+    titleLabel.numberOfLines = 0
     titleLabel.textColor = UIColor.black
     titleLabel.font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
     
@@ -237,10 +263,4 @@ func addDescription(_ description: String) -> UILabel {
     
     return descriptionLabel
 }
-
-
-
-
-
-
 
