@@ -156,7 +156,7 @@ class ThirdViewController: UIViewController {
     
     var sliderValue = 64
     var interactionInfo = addDescription("info")
-    
+    var collectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -210,20 +210,20 @@ class ThirdViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 20, left: 9, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 49, height: 49)
 
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = UIColor.white
-        collectionView.layer.cornerRadius = 10
-        collectionView.dataSource = self
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView?.backgroundColor = UIColor.white
+        collectionView?.layer.cornerRadius = 10
+        collectionView?.dataSource = self
 
-        contentView.addSubview(collectionView)
+        contentView.addSubview(collectionView ?? UICollectionView())
         
 
         // slider
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumValue = 64
-        slider.maximumValue = 84
+        slider.maximumValue = 85
         slider.minimumTrackTintColor = customColor.tint
         slider.addTarget(self, action: #selector(sliderUpdate), for: .valueChanged)
         view.addSubview(slider)
@@ -258,7 +258,7 @@ class ThirdViewController: UIViewController {
         interactionInfo.text = "Info"
         interactionInfo.backgroundColor = UIColor.gray
         interactionInfo.textAlignment = .center
-        interactionInfo.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        interactionInfo.font = UIFont(name: "AvenirNext-SemiBold", size: 35)
         view.addSubview(interactionInfo)
         NSLayoutConstraint.activate([
             interactionInfo.widthAnchor.constraint(equalToConstant: 400),
@@ -289,7 +289,7 @@ class ThirdViewController: UIViewController {
     @objc func sliderUpdate(_ sender: UISlider) {
         sliderValue = Int(sender.value)
         interactionInfo.text = String(sender.value)
-        
+        collectionView?.reloadData()
     }
     
     
