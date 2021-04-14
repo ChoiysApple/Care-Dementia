@@ -222,7 +222,7 @@ class ThirdViewController: UIViewController {
         // slider
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.minimumValue = 65
+        slider.minimumValue = 64
         slider.maximumValue = 84
         slider.minimumTrackTintColor = customColor.tint
         slider.addTarget(self, action: #selector(sliderUpdate), for: .valueChanged)
@@ -308,9 +308,9 @@ extension ThirdViewController: UICollectionViewDataSource {
        
         let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 50))
-//        title.text = cellContent(age: sliderValue, cellIndex: indexPath.row)
-    title.text = String(indexPath.row)
-        title.font = UIFont(name: "AvenirNext-Bold", size: 15)
+    
+        title.text = cellContent(age: sliderValue, cellIndex: indexPath.row)
+        title.font = UIFont(name: "AvenirNext-Bold", size: 35)
         title.textAlignment = .center
         cell.contentView.addSubview(title)
 
@@ -318,7 +318,14 @@ extension ThirdViewController: UICollectionViewDataSource {
    }
     
     func cellContent(age: Int, cellIndex: Int) -> String {
-        if data.prevelence[age][cellIndex]{
+        
+        var ageCode = 0
+        if age > 64 && age < 75 { ageCode = 1 }
+        else if age >= 75 && age < 80 {ageCode = 2}
+        else if age >= 80 && age < 85 {ageCode = 3}
+        else if age == 85 {ageCode = 4}
+        
+        if !data.prevelence[ageCode][cellIndex]{
             return "👴🏻"
         } else {
             return "🤕"
@@ -370,7 +377,7 @@ struct data {
     ]
     static let prevelence_range = [
         "Under 65",
-        "64 ~ 74",
+        "65 ~ 74",
         "75 ~ 79",
         "80 ~ 84",
         "Over 85"
