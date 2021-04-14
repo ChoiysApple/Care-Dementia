@@ -154,8 +154,8 @@ class SecondViewController: UIViewController {
 // Statistics Page
 class ThirdViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         let view = addView()
         
@@ -191,30 +191,36 @@ class ThirdViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 10
+        contentView.clipsToBounds = true
+
         view.addSubview(contentView)
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalToConstant: 400),
-            contentView.heightAnchor.constraint(equalToConstant: 10),
+            contentView.heightAnchor.constraint(equalToConstant: 150),
             contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
 
         // Statistics visual view
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 30, height: 30)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 9, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 49, height: 49)
 
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.backgroundColor = UIColor.white
-
+        collectionView.layer.cornerRadius = 10
         collectionView.dataSource = self
 
         contentView.addSubview(collectionView)
-
-
+        
+        
+        // slider
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumValue = 65
+        slider.maximumValue = 84
+        slider.addTarget(self, action: #selector(sliderUpdate), for: .valueChanged)
         view.addSubview(slider)
         NSLayoutConstraint.activate([
             slider.widthAnchor.constraint(equalToConstant: 400),
@@ -222,6 +228,7 @@ class ThirdViewController: UIViewController {
             slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
+
         // Button
         let nextButton = addButton(descriptions.statistics_button)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
@@ -242,6 +249,10 @@ class ThirdViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    @objc func sliderUpdate(_ sender: UISlider) {
+        // to-do: change collection view
+    }
+    
     
 
     
@@ -251,7 +262,7 @@ class ThirdViewController: UIViewController {
 extension ThirdViewController: UICollectionViewDataSource {
    // CollectionView DataSource Protocol stubs
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 16
+       return 14
    }
 
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
