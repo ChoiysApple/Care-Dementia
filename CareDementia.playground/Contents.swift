@@ -1,4 +1,3 @@
-//
 //  CareDementia.playground
 //  Care Dementia
 //
@@ -157,6 +156,7 @@ class ThirdViewController: UIViewController {
     var sliderValue = 64
     var interactionInfo = addDescription("info")
     var collectionView: UICollectionView?
+    var currentAgeCode = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,10 +255,10 @@ class ThirdViewController: UIViewController {
         ])
         
         // Description
-        interactionInfo.text = "Info"
-        interactionInfo.backgroundColor = UIColor.gray
+        interactionInfo.text = data.prevelence_range[0]
         interactionInfo.textAlignment = .center
-        interactionInfo.font = UIFont(name: "AvenirNext-SemiBold", size: 35)
+        interactionInfo.textColor = customColor.tint
+        interactionInfo.font = UIFont(name: "AvenirNext-SemiBold", size: 50)
         view.addSubview(interactionInfo)
         NSLayoutConstraint.activate([
             interactionInfo.widthAnchor.constraint(equalToConstant: 400),
@@ -288,8 +288,14 @@ class ThirdViewController: UIViewController {
     
     @objc func sliderUpdate(_ sender: UISlider) {
         sliderValue = Int(sender.value)
-        interactionInfo.text = String(sender.value)
-        collectionView?.reloadData()
+        
+        let newAgeCode = getAgeCode(age: sliderValue)
+        if currentAgeCode != newAgeCode {
+            collectionView?.reloadData()
+            interactionInfo.text = getAgeDescription(age: sliderValue)
+            currentAgeCode = newAgeCode
+        }
+        
     }
     
     
@@ -317,19 +323,34 @@ extension ThirdViewController: UICollectionViewDataSource {
        return cell
    }
     
+
+}
+
+extension ThirdViewController {
+    
+    func getAgeCode(age: Int) -> Int {
+        if age > 64 && age < 75 {return 1 }
+        else if age >= 75 && age < 80 {return 2}
+        else if age >= 80 && age < 85 {return 3}
+        else if age == 85 {return 4}
+        else { return 0 }
+    }
+    
     func cellContent(age: Int, cellIndex: Int) -> String {
         
-        var ageCode = 0
-        if age > 64 && age < 75 { ageCode = 1 }
-        else if age >= 75 && age < 80 {ageCode = 2}
-        else if age >= 80 && age < 85 {ageCode = 3}
-        else if age == 85 {ageCode = 4}
+        let ageCode = getAgeCode(age: age)
         
         if !data.prevelence[ageCode][cellIndex]{
             return "👴🏻"
         } else {
             return "🤕"
         }
+    }
+    
+    func getAgeDescription(age: Int) -> String {
+        let ageCode = getAgeCode(age: age)
+        
+        return data.prevelence_range[ageCode]
     }
 }
 
@@ -376,11 +397,11 @@ struct data {
         [true, true, true, true, false, false, false, false, false, false, false, false, false, false]
     ]
     static let prevelence_range = [
-        "Under 65",
-        "65 ~ 74",
-        "75 ~ 79",
-        "80 ~ 84",
-        "Over 85"
+        "Under 65 |  2% of prevelence",
+        "65 ~ 74  |  4% of prevelence",
+        "75 ~ 79  |  12% of prevelence",
+        "80 ~ 84  |  20% of prevelence",
+        "Over 85  |  40% of prevelence"
     ]
 
 }
