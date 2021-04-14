@@ -11,7 +11,7 @@ import PlaygroundSupport
 let viewRect = CGRect(x: 0, y: 0, width: 480, height: 720)
 
 // Main
-let firstVC = FirstViewController()
+let firstVC = ThirdViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -214,12 +214,13 @@ class ThirdViewController: UIViewController {
 
         contentView.addSubview(collectionView)
         
-        
+
         // slider
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumValue = 65
         slider.maximumValue = 84
+        slider.minimumTrackTintColor = customColor.tint
         slider.addTarget(self, action: #selector(sliderUpdate), for: .valueChanged)
         view.addSubview(slider)
         NSLayoutConstraint.activate([
@@ -228,7 +229,27 @@ class ThirdViewController: UIViewController {
             slider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
-
+        let minLabel = addDescription("64")
+        view.addSubview(minLabel)
+        NSLayoutConstraint.activate([
+            minLabel.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 5),
+            minLabel.leftAnchor.constraint(equalTo: slider.leftAnchor)
+        ])
+        
+        let ageLabel = addDescription("Age")
+        view.addSubview(ageLabel)
+        NSLayoutConstraint.activate([
+            ageLabel.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 5),
+            ageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        let maxLabel = addDescription("85")
+        view.addSubview(maxLabel)
+        NSLayoutConstraint.activate([
+            maxLabel.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 5),
+            maxLabel.rightAnchor.constraint(equalTo: slider.rightAnchor)
+        ])
+        
         // Button
         let nextButton = addButton(descriptions.statistics_button)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
