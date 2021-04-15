@@ -10,7 +10,7 @@ import PlaygroundSupport
 let viewRect = CGRect(x: 0, y: 0, width: 480, height: 720)
 
 // Main
-let firstVC = FourthViewController()
+let firstVC = FirstViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -277,6 +277,7 @@ class ThirdViewController: UIViewController {
             interactionInfo.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        // alertLabel: Appears when slider reached max
         alertLabel.isHidden = true
         alertLabel.textAlignment = .center
         alertLabel.textColor = customColor.alertColor
@@ -284,7 +285,7 @@ class ThirdViewController: UIViewController {
         view.addSubview(alertLabel)
         NSLayoutConstraint.activate([
             alertLabel.widthAnchor.constraint(equalToConstant: 450),
-            alertLabel.topAnchor.constraint(equalTo: interactionInfo.bottomAnchor, constant: 20),
+            alertLabel.topAnchor.constraint(equalTo: interactionInfo.bottomAnchor, constant: 30),
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -384,10 +385,13 @@ extension ThirdViewController {
 
 class FourthViewController: UIViewController {
     
+    var isAllTapped = [false, false, false]
+    
     let descriptionLabel1 = addDescription(descriptions.awareness_description1)
     let descriptionLabel2 = addDescription(descriptions.awareness_description2)
     let descriptionLabel3 = addDescription(descriptions.awareness_description3)
-
+    let conclusionEmoji = addEmojiButton(descriptions.awareness_conclusionEmoji, 50)
+    let nextButton = addButton(descriptions.awareness_button)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -432,43 +436,46 @@ class FourthViewController: UIViewController {
         ])
         
         // Emoji + Description1
-        let emoji1 = addEmoji(descriptions.awareness_emoji1, 50)
+        let emoji1 = addEmojiButton(descriptions.awareness_emoji1, 50)
+        emoji1.addTarget(self, action: #selector(emojiButton1Tapped(_:)), for: .touchUpInside)
         view.addSubview(emoji1)
         NSLayoutConstraint.activate([
-            emoji1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 20),
+            emoji1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 30),
             emoji1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
-        let descriptionLabel1 = addDescription(descriptions.awareness_description1)
+        descriptionLabel1.isHidden = true
         view.addSubview(descriptionLabel1)
         NSLayoutConstraint.activate([
             descriptionLabel1.widthAnchor.constraint(equalToConstant: 300),
-            descriptionLabel1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 30),
+            descriptionLabel1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 40),
             descriptionLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
         ])
         
         // Emoji + Description2
-        let emoji2 = addEmoji(descriptions.awareness_emoji2, 50)
+        let emoji2 = addEmojiButton(descriptions.awareness_emoji2, 50)
+        emoji2.addTarget(self, action: #selector(emojiButton2Tapped(_:)), for: .touchUpInside)
         view.addSubview(emoji2)
         NSLayoutConstraint.activate([
-            emoji2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 20),
+            emoji2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 25),
             emoji2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
-        let descriptionLabel2 = addDescription(descriptions.awareness_description2)
+        descriptionLabel2.isHidden = true
         view.addSubview(descriptionLabel2)
         NSLayoutConstraint.activate([
             descriptionLabel2.widthAnchor.constraint(equalToConstant: 300),
-            descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 30),
+            descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 35),
             descriptionLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10)
         ])
         
         // Emoji + Description3
-        let emoji3 = addEmoji(descriptions.awareness_emoji3, 50)
+        let emoji3 = addEmojiButton(descriptions.awareness_emoji3, 50)
+        emoji3.addTarget(self, action: #selector(emojiButton3Tapped(_:)), for: .touchUpInside)
         view.addSubview(emoji3)
         NSLayoutConstraint.activate([
-            emoji3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 20),
+            emoji3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 30),
             emoji3.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
         ])
-        let descriptionLabel3 = addDescription(descriptions.awareness_description1)
+        descriptionLabel3.isHidden = true
         view.addSubview(descriptionLabel3)
         NSLayoutConstraint.activate([
             descriptionLabel3.widthAnchor.constraint(equalToConstant: 300),
@@ -476,12 +483,87 @@ class FourthViewController: UIViewController {
             descriptionLabel3.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
         ])
         
+        conclusionEmoji.isHidden = true
+        conclusionEmoji.addTarget(self, action: #selector(emojiButtonCTapped(_:)), for: .touchUpInside)
+        view.addSubview(conclusionEmoji)
+        NSLayoutConstraint.activate([
+            conclusionEmoji.widthAnchor.constraint(equalToConstant: 400),
+            conclusionEmoji.topAnchor.constraint(equalTo: descriptionLabel3.bottomAnchor, constant: 55),
+            conclusionEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
+        ])
         
-        
+        // Button
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        nextButton.isHidden = true
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 400),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
 
         self.view = view
     }   // [END] of loadView
+    
+    @objc func emojiButton1Tapped(_ sender: UIButton) {
+        isAllTapped[0] = true
+        descriptionLabel1.isHidden = false
+        checkAllTapped()
+    }
+    
+    @objc func emojiButton2Tapped(_ sender: UIButton) {
+        isAllTapped[1] = true
+        descriptionLabel2.isHidden = false
+        checkAllTapped()
+    }
+    
+    @objc func emojiButton3Tapped(_ sender: UIButton) {
+        isAllTapped[2] = true
+        descriptionLabel3.isHidden = false
+        checkAllTapped()
+    }
+    
+    @objc func emojiButtonCTapped(_ sender: UIButton) {
+        sender.titleLabel?.textAlignment = .center
+        sender.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        sender.setTitleColor(customColor.alertColor, for: .normal)
+        sender.setTitle(descriptions.awareness_conclusionDescription, for: .normal)
+        sender.titleLabel?.numberOfLines = 0
+        nextButton.isHidden = false
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let nextVC = FifthViewController()
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func checkAllTapped() {
+        
+        for i in isAllTapped {
+            if i == false {
+                return
+            }
+        }
+        
+        conclusionEmoji.isHidden = false
+    }
+    
 }   // [END] of ThirdViewController
+
+class FifthViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        let view = addView()
+        
+        self.view = view
+    }
+    
+}
+
 
 
 // Constants
@@ -517,7 +599,10 @@ struct descriptions {
     static let awareness_emoji2 = "🤕"
     static let awareness_description2 = "People have Dementia are vulnerable to fall accident and so on"
     static let awareness_emoji3 = "🥲"
-    static let awareness_description3 = "People who care for dementia patients are 1.7 times more likely to have depressive symptoms. The rate of thinking about death was more than seven times higher."
+    static let awareness_description3 = "People caring dementia patients have 1.7 times more depressive symptoms and 7 times more thinking of death"
+    static let awareness_conclusionEmoji = "🫂"
+    static let awareness_conclusionDescription = "Dementia is not only hard for Patient,               But also hard for FAMILY MEMBERS"
+    static let awareness_button = "But isn't dementia cureable and preventable?"
     
 
 }
@@ -597,4 +682,14 @@ func addDescription(_ description: String) -> UILabel {
     descriptionLabel.numberOfLines = 0
     
     return descriptionLabel
+}
+
+func addEmojiButton(_ emoji: String, _ size: Float) -> UIButton {
+    let emojiButton = UIButton()
+    emojiButton.translatesAutoresizingMaskIntoConstraints = false
+    emojiButton.setTitle(emoji, for: .normal)
+    emojiButton.titleLabel?.textAlignment = .center
+    emojiButton.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(size))
+    
+    return emojiButton
 }
