@@ -156,7 +156,7 @@ class ThirdViewController: UIViewController {
     var sliderValue = 64
     var currentAgeCode = 0
 
-    var interactionInfo = addDescription("info")
+    var interactionInfo = addDescription("")
     var collectionView: UICollectionView?
     var alertLabel = addDescription(descriptions.statistics_alert)
     
@@ -193,6 +193,15 @@ class ThirdViewController: UIViewController {
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        let collectionLabel = addDescription(descriptions.statistics_collectionDescription)
+        collectionLabel.font = UIFont(name: "AvenirNext-medium", size: 12)
+        view.addSubview(collectionLabel)
+        NSLayoutConstraint.activate([
+            collectionLabel.widthAnchor.constraint(equalToConstant: 400),
+            collectionLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            collectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .white
@@ -203,7 +212,7 @@ class ThirdViewController: UIViewController {
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalToConstant: 400),
             contentView.heightAnchor.constraint(equalToConstant: 150),
-            contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+            contentView.topAnchor.constraint(equalTo: collectionLabel.bottomAnchor, constant: 20),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
 
@@ -260,7 +269,7 @@ class ThirdViewController: UIViewController {
         interactionInfo.text = data.prevelence_range[0]
         interactionInfo.textAlignment = .center
         interactionInfo.textColor = customColor.tint
-        interactionInfo.font = UIFont(name: "AvenirNext-SemiBold", size: 50)
+        interactionInfo.font = UIFont(name: "AvenirNext-Regular", size: 20)
         view.addSubview(interactionInfo)
         NSLayoutConstraint.activate([
             interactionInfo.widthAnchor.constraint(equalToConstant: 400),
@@ -275,7 +284,7 @@ class ThirdViewController: UIViewController {
         view.addSubview(alertLabel)
         NSLayoutConstraint.activate([
             alertLabel.widthAnchor.constraint(equalToConstant: 450),
-            alertLabel.topAnchor.constraint(equalTo: interactionInfo.bottomAnchor, constant: 40),
+            alertLabel.topAnchor.constraint(equalTo: interactionInfo.bottomAnchor, constant: 20),
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -344,6 +353,7 @@ extension ThirdViewController: UICollectionViewDataSource {
 
 }
 
+// custom methods
 extension ThirdViewController {
     
     func getAgeCode(age: Int) -> Int {
@@ -359,9 +369,9 @@ extension ThirdViewController {
         let ageCode = getAgeCode(age: age)
         
         if !data.prevelence[ageCode][cellIndex]{
-            return "👴🏻"
+            return "😄"
         } else {
-            return "🤕"
+            return "🥵"
         }
     }
     
@@ -402,6 +412,7 @@ struct descriptions {
     
     static let statistics_title = "You might think Dementia is not common thing"
     static let statistics_description = "How many people get Dementia by getting old?"
+    static let statistics_collectionDescription = "Slide to see how many people get dementia by getting old                                       (🥵 means people got Dementia)"
     static let statistics_alert = "You can see, lots of Old people get Dementia"
     static let statistics_button = "Old people get Dementia, But I'm not old"
     
@@ -478,6 +489,7 @@ func addDescription(_ description: String) -> UILabel {
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     descriptionLabel.text = description
     descriptionLabel.textColor = UIColor.black
+    descriptionLabel.font = UIFont(name: "AvenirNext-regular", size: UIFont.labelFontSize)
     descriptionLabel.numberOfLines = 0
     
     return descriptionLabel
