@@ -154,9 +154,11 @@ class SecondViewController: UIViewController {
 class ThirdViewController: UIViewController {
     
     var sliderValue = 64
+    var currentAgeCode = 0
+
     var interactionInfo = addDescription("info")
     var collectionView: UICollectionView?
-    var currentAgeCode = 0
+    var alertLabel = addDescription(descriptions.statistics_alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -266,6 +268,17 @@ class ThirdViewController: UIViewController {
             interactionInfo.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        alertLabel.isHidden = true
+        alertLabel.textAlignment = .center
+        alertLabel.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        alertLabel.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        view.addSubview(alertLabel)
+        NSLayoutConstraint.activate([
+            alertLabel.widthAnchor.constraint(equalToConstant: 450),
+            alertLabel.topAnchor.constraint(equalTo: interactionInfo.bottomAnchor, constant: 40),
+            alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
         // Button
         let nextButton = addButton(descriptions.statistics_button)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
@@ -294,6 +307,11 @@ class ThirdViewController: UIViewController {
             collectionView?.reloadData()
             interactionInfo.text = getAgeDescription(age: sliderValue)
             currentAgeCode = newAgeCode
+            
+            if newAgeCode == 4{
+                alertLabel.isHidden = false
+                
+            }
         }
         
     }
@@ -384,6 +402,7 @@ struct descriptions {
     
     static let statistics_title = "You might think Dementia is not common thing"
     static let statistics_description = "How many people get Dementia by getting old?"
+    static let statistics_alert = "You can see, lots of Old people get Dementia"
     static let statistics_button = "Old people get Dementia, But I'm not old"
     
 }
