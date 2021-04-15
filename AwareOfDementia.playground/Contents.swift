@@ -384,8 +384,31 @@ extension ThirdViewController {
 
 class FourthViewController: UIViewController {
     
-    override func loadView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
         let view = addView()
+        
+        // title
+        let titleLabel = addHeading(descriptions.awareness_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        
 
         self.view = view
     }   // [END] of loadView
@@ -415,6 +438,9 @@ struct descriptions {
     static let statistics_collectionDescription = "Slide to see how many people get dementia by getting old                                       (🥵 means people got Dementia)"
     static let statistics_alert = "You can see, lots of Old people get Dementia"
     static let statistics_button = "Old people get Dementia, But I'm not old"
+    
+    static let awareness_title = "But grandparents are Old"
+    
     
 }
 
