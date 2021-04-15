@@ -10,7 +10,7 @@ import PlaygroundSupport
 let viewRect = CGRect(x: 0, y: 0, width: 480, height: 720)
 
 // Main
-let firstVC = FirstViewController()
+let firstVC = SixthViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -150,7 +150,7 @@ class SecondViewController: UIViewController {
 
 
 
-// Statistics Page
+// Show how much old people commomly get Dementia by
 class ThirdViewController: UIViewController {
     
     var sliderValue = 64
@@ -383,6 +383,7 @@ extension ThirdViewController {
     }
 }
 
+// Why Dementia is even related to young people
 class FourthViewController: UIViewController {
     
     var isAllTapped = [false, false, false]
@@ -552,6 +553,7 @@ class FourthViewController: UIViewController {
     
 }   // [END] of ThirdViewController
 
+// Benefits of diagnosing Dementia in advance
 class FifthViewController: UIViewController {
     
     var isAllTapped = [false, false, false, false]
@@ -726,13 +728,16 @@ class FifthViewController: UIViewController {
     
 }
 
+// Self-diagnosis for dementia
 class SixthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let view = addView()
+        
 
+        
         self.view = view
     }
 }
@@ -786,10 +791,10 @@ struct descriptions {
     static let benefits_emoji3 = "👩‍🦽"
     static let benefits_description3 = "People with dementia vulnerable to accidents can prevent accidents in advance"
     static let benefits_emoji4 = "👨‍👩‍👧‍👦"
-    static let benefits_description4 = "Families can make long-term plans in advance."
-
+    static let benefits_description4 = "Families can make long-term plans and be prepared in advance."
     static let benefits_button = "I get it. Then how can I detect Dementia?"
 
+    
 }
 
 struct data {
