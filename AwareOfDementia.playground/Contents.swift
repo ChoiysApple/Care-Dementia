@@ -10,7 +10,7 @@ import PlaygroundSupport
 let viewRect = CGRect(x: 0, y: 0, width: 480, height: 720)
 
 // Main
-let firstVC = FirstViewController()
+let firstVC = FourthViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -279,7 +279,7 @@ class ThirdViewController: UIViewController {
         
         alertLabel.isHidden = true
         alertLabel.textAlignment = .center
-        alertLabel.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        alertLabel.textColor = customColor.alertColor
         alertLabel.font = UIFont(name: "AvenirNext-Bold", size: 20)
         view.addSubview(alertLabel)
         NSLayoutConstraint.activate([
@@ -384,6 +384,11 @@ extension ThirdViewController {
 
 class FourthViewController: UIViewController {
     
+    let descriptionLabel1 = addDescription(descriptions.awareness_description1)
+    let descriptionLabel2 = addDescription(descriptions.awareness_description2)
+    let descriptionLabel3 = addDescription(descriptions.awareness_description3)
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -408,6 +413,70 @@ class FourthViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        // Description
+        let introductionLabel = addDescription(descriptions.awareness_introduction)
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        let guideLabel = addDescription(descriptions.awareness_guide)
+        guideLabel.font = UIFont(name: "AvenirNext-medium", size: 12)
+        view.addSubview(guideLabel)
+        NSLayoutConstraint.activate([
+            guideLabel.widthAnchor.constraint(equalToConstant: 400),
+            guideLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 10),
+            guideLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Emoji + Description1
+        let emoji1 = addEmoji(descriptions.awareness_emoji1, 50)
+        view.addSubview(emoji1)
+        NSLayoutConstraint.activate([
+            emoji1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 20),
+            emoji1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        let descriptionLabel1 = addDescription(descriptions.awareness_description1)
+        view.addSubview(descriptionLabel1)
+        NSLayoutConstraint.activate([
+            descriptionLabel1.widthAnchor.constraint(equalToConstant: 300),
+            descriptionLabel1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 30),
+            descriptionLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
+        ])
+        
+        // Emoji + Description2
+        let emoji2 = addEmoji(descriptions.awareness_emoji2, 50)
+        view.addSubview(emoji2)
+        NSLayoutConstraint.activate([
+            emoji2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 20),
+            emoji2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        let descriptionLabel2 = addDescription(descriptions.awareness_description2)
+        view.addSubview(descriptionLabel2)
+        NSLayoutConstraint.activate([
+            descriptionLabel2.widthAnchor.constraint(equalToConstant: 300),
+            descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 30),
+            descriptionLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10)
+        ])
+        
+        // Emoji + Description3
+        let emoji3 = addEmoji(descriptions.awareness_emoji3, 50)
+        view.addSubview(emoji3)
+        NSLayoutConstraint.activate([
+            emoji3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 20),
+            emoji3.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        let descriptionLabel3 = addDescription(descriptions.awareness_description1)
+        view.addSubview(descriptionLabel3)
+        NSLayoutConstraint.activate([
+            descriptionLabel3.widthAnchor.constraint(equalToConstant: 300),
+            descriptionLabel3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 30),
+            descriptionLabel3.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
+        ])
+        
+        
         
 
         self.view = view
@@ -419,6 +488,7 @@ class FourthViewController: UIViewController {
 struct customColor {
     static let main = #colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
     static let tint = #colorLiteral(red: 0.4470588235, green: 0.4392156863, blue: 0.4235294118, alpha: 1)
+    static let alertColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
 }
 
 struct descriptions {
@@ -439,9 +509,17 @@ struct descriptions {
     static let statistics_alert = "You can see, lots of Old people get Dementia"
     static let statistics_button = "Old people get Dementia, But I'm not old"
     
-    static let awareness_title = "But grandparents are Old"
+    static let awareness_title = "But our Parents and Grandparents are Old"
+    static let awareness_introduction = "Even young people can be related to Demantia"
+    static let awareness_guide = "(Click Emojis!)"
+    static let awareness_emoji1 = "👴🏻"
+    static let awareness_description1 = "If you have some old people to care in family, they can get Dementia"
+    static let awareness_emoji2 = "🤕"
+    static let awareness_description2 = "People have Dementia are vulnerable to fall accident and so on"
+    static let awareness_emoji3 = "🥲"
+    static let awareness_description3 = "People who care for dementia patients are 1.7 times more likely to have depressive symptoms. The rate of thinking about death was more than seven times higher."
     
-    
+
 }
 
 struct data {
@@ -486,7 +564,7 @@ func addEmoji(_ emoji: String, _ size: Float) -> UILabel {
     centerEmoji.translatesAutoresizingMaskIntoConstraints = false
     centerEmoji.text = emoji
     centerEmoji.textAlignment = .center
-    centerEmoji.font = UIFont.systemFont(ofSize: 150)
+    centerEmoji.font = UIFont.systemFont(ofSize: CGFloat(size))
     
     return centerEmoji
 }
