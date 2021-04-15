@@ -554,16 +554,187 @@ class FourthViewController: UIViewController {
 
 class FifthViewController: UIViewController {
     
+    var isAllTapped = [false, false, false, false]
+    
+    let descriptionLabel1 = addDescription(descriptions.benefits_description1)
+    let descriptionLabel2 = addDescription(descriptions.benefits_description2)
+    let descriptionLabel3 = addDescription(descriptions.benefits_description3)
+    let descriptionLabel4 = addDescription(descriptions.benefits_description4)
+    let nextButton = addButton(descriptions.benefits_button)
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         let view = addView()
         
+        // title
+        let titleLabel = addHeading(descriptions.benefits_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let introductionLabel = addDescription(descriptions.benefits_introduction)
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        let guideLabel = addDescription(descriptions.awareness_guide)
+        guideLabel.font = UIFont(name: "AvenirNext-medium", size: 12)
+        view.addSubview(guideLabel)
+        NSLayoutConstraint.activate([
+            guideLabel.widthAnchor.constraint(equalToConstant: 400),
+            guideLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 10),
+            guideLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Emoji + Description1
+        let emoji1 = addEmojiButton(descriptions.benefits_emoji1, 50)
+        emoji1.addTarget(self, action: #selector(emojiButton1Tapped(_:)), for: .touchUpInside)
+        view.addSubview(emoji1)
+        NSLayoutConstraint.activate([
+            emoji1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 30),
+            emoji1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        descriptionLabel1.isHidden = true
+        view.addSubview(descriptionLabel1)
+        NSLayoutConstraint.activate([
+            descriptionLabel1.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 40),
+            descriptionLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
+        ])
+
+        // Emoji + Description2
+        let emoji2 = addEmojiButton(descriptions.benefits_emoji2, 50)
+        emoji2.addTarget(self, action: #selector(emojiButton2Tapped(_:)), for: .touchUpInside)
+        view.addSubview(emoji2)
+        NSLayoutConstraint.activate([
+            emoji2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 25),
+            emoji2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        descriptionLabel2.isHidden = true
+        view.addSubview(descriptionLabel2)
+        NSLayoutConstraint.activate([
+            descriptionLabel2.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 35),
+            descriptionLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10)
+        ])
+
+        // Emoji + Description3
+        let emoji3 = addEmojiButton(descriptions.benefits_emoji3, 50)
+        emoji3.addTarget(self, action: #selector(emojiButton3Tapped(_:)), for: .touchUpInside)
+        view.addSubview(emoji3)
+        NSLayoutConstraint.activate([
+            emoji3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 30),
+            emoji3.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        descriptionLabel3.isHidden = true
+        view.addSubview(descriptionLabel3)
+        NSLayoutConstraint.activate([
+            descriptionLabel3.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel3.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 45),
+            descriptionLabel3.leftAnchor.constraint(equalTo: emoji3.rightAnchor, constant: 10)
+        ])
+
+        // Emoji + Description4
+        let emoji4 = addEmojiButton(descriptions.benefits_emoji4, 50)
+        emoji4.addTarget(self, action: #selector(emojiButton4Tapped(_:)), for: .touchUpInside)
+        view.addSubview(emoji4)
+        NSLayoutConstraint.activate([
+            emoji4.topAnchor.constraint(equalTo: descriptionLabel3.bottomAnchor, constant: 30),
+            emoji4.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        descriptionLabel4.isHidden = true
+        view.addSubview(descriptionLabel4)
+        NSLayoutConstraint.activate([
+            descriptionLabel4.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel4.topAnchor.constraint(equalTo: descriptionLabel3.bottomAnchor, constant: 45),
+            descriptionLabel4.leftAnchor.constraint(equalTo: emoji4.rightAnchor, constant: 10)
+        ])
+        
+        // Button
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        nextButton.isHidden = true
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 400),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
         self.view = view
+    }   // [END] of loadView
+    
+    @objc func emojiButton1Tapped(_ sender: UIButton) {
+        isAllTapped[0] = true
+        descriptionLabel1.isHidden = false
+        checkAllTapped()
     }
     
+    @objc func emojiButton2Tapped(_ sender: UIButton) {
+        isAllTapped[1] = true
+        descriptionLabel2.isHidden = false
+        checkAllTapped()
+    }
+    
+    @objc func emojiButton3Tapped(_ sender: UIButton) {
+        isAllTapped[2] = true
+        descriptionLabel3.isHidden = false
+        checkAllTapped()
+    }
+    
+    @objc func emojiButton4Tapped(_ sender: UIButton) {
+        isAllTapped[3] = true
+        descriptionLabel4.isHidden = false
+        checkAllTapped()
+    }
+    
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let nextVC = SixthViewController()
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func checkAllTapped() {
+        
+        for i in isAllTapped {
+            if i == false {
+                return
+            }
+        }
+        
+        nextButton.isHidden = false
+    }
+    
+}
+
+class SixthViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let view = addView()
+
+        self.view = view
+    }
 }
 
 
@@ -609,7 +780,7 @@ struct descriptions {
     static let benefits_title = "Treatment and Early Diagnosis of Dementia is Important"
     static let benefits_introduction = "Detecting Dementia is not worthless"
     static let benefits_emoji1 = "⏳"
-    static let benefits_description1 = "There's dementia curable in early Stages"
+    static let benefits_description1 = "Some dementia is completely curable if found and treated in early Stages"
     static let benefits_emoji2 = "💊"
     static let benefits_description2 = "Even it's not curable, proper medication can slow its Progress."
     static let benefits_emoji3 = "👩‍🦽"
@@ -617,7 +788,7 @@ struct descriptions {
     static let benefits_emoji4 = "👨‍👩‍👧‍👦"
     static let benefits_description4 = "Families can make long-term plans in advance."
 
-    static let benefits_button = "Next"
+    static let benefits_button = "I get it. Then how can I detect Dementia?"
 
 }
 
