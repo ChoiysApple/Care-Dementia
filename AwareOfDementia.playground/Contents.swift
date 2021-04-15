@@ -554,10 +554,12 @@ class FourthViewController: UIViewController {
 
 class FifthViewController: UIViewController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         let view = addView()
+        
         
         self.view = view
     }
@@ -604,6 +606,18 @@ struct descriptions {
     static let awareness_conclusionDescription = "Dementia is not only hard for Patient,               But also hard for FAMILY MEMBERS"
     static let awareness_button = "But isn't dementia cureable and preventable?"
     
+    static let benefits_title = "Treatment and Early Diagnosis of Dementia is Important"
+    static let benefits_introduction = "Detecting Dementia is not worthless"
+    static let benefits_emoji1 = "⏳"
+    static let benefits_description1 = "There's dementia curable in early Stages"
+    static let benefits_emoji2 = "💊"
+    static let benefits_description2 = "Even it's not curable, proper medication can slow its Progress."
+    static let benefits_emoji3 = "👩‍🦽"
+    static let benefits_description3 = "People with dementia vulnerable to accidents can prevent accidents in advance"
+    static let benefits_emoji4 = "👨‍👩‍👧‍👦"
+    static let benefits_description4 = "Families can make long-term plans in advance."
+
+    static let benefits_button = "Next"
 
 }
 
