@@ -511,7 +511,7 @@ struct descriptions {
     
     static let awareness_title = "But our Parents and Grandparents are Old"
     static let awareness_introduction = "Even young people can be related to Demantia"
-    static let awareness_guide = "(Click Emojis!)"
+    static let awareness_guide = "(Guess why, and Click Emojis!)"
     static let awareness_emoji1 = "👴🏻"
     static let awareness_description1 = "If you have some old people to care in family, they can get Dementia"
     static let awareness_emoji2 = "🤕"
