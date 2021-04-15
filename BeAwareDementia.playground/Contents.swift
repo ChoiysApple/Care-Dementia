@@ -2,10 +2,8 @@
 //  Care Dementia
 //
 //  Created by Daegun Choi
-
 import UIKit
 import PlaygroundSupport
-
 
 let viewRect = CGRect(x: 0, y: 0, width: 480, height: 720)
 
