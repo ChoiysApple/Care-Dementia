@@ -815,24 +815,36 @@ class TestinfoViewController: UIViewController {
         
         let button1 = addButton(descriptions.testinfo_button1)
         button1.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
-        
+        button1.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 18)
+        button1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: -130, right: 0)
+        let buttonEmoji1 = addEmoji(descriptions.testinfo_emoji1, 80)
         view.addSubview(button1)
+        view.addSubview(buttonEmoji1)
         NSLayoutConstraint.activate([
             button1.widthAnchor.constraint(equalToConstant: 200),
-            button1.heightAnchor.constraint(equalToConstant: 50),
+            button1.heightAnchor.constraint(equalToConstant: 200),
             button1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            button1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
+            button1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
+            
+            buttonEmoji1.centerXAnchor.constraint(equalTo: button1.centerXAnchor),
+            buttonEmoji1.centerYAnchor.constraint(equalTo: button1.centerYAnchor, constant: -15)
         ])
         
         let button2 = addButton(descriptions.testinfo_button2)
         button2.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
-        
+        button2.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 18)
+        button2.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: -130, right: 0)
+        let buttonEmoji2 = addEmoji(descriptions.testinfo_emoji2, 100)
         view.addSubview(button2)
+        view.addSubview(buttonEmoji2)
         NSLayoutConstraint.activate([
             button2.widthAnchor.constraint(equalToConstant: 200),
-            button2.heightAnchor.constraint(equalToConstant: 50),
+            button2.heightAnchor.constraint(equalToConstant: 200),
             button2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            button2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: -10)
+            button2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+            
+            buttonEmoji2.centerXAnchor.constraint(equalTo: button2.centerXAnchor),
+            buttonEmoji2.centerYAnchor.constraint(equalTo: button2.centerYAnchor, constant: -15)
         ])
         
     }
@@ -935,6 +947,7 @@ func addDivider() -> UIView{
 func addButton(_ button: String) -> UIButton {
     let nextButton = UIButton()
     nextButton.translatesAutoresizingMaskIntoConstraints = false
+    nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: UIFont.labelFontSize)
     nextButton.setTitle(button, for: .normal)
     nextButton.setTitleColor(UIColor.white, for: .normal)
     nextButton.backgroundColor = customColor.tint
