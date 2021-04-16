@@ -76,15 +76,19 @@ class TitleViewController: UIViewController {
     }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = SecondViewController()
+        if sender.titleLabel?.text == descriptions.testinfo_button1 {
+            self.navigationController?.pushViewController(IntroductionViewController(), animated: true)
+
+        } else {
+            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+        }
         
-        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }   // [END] of StastisticsViewController
 
 // Introduction Page
-class SecondViewController: UIViewController {
+class IntroductionViewController: UIViewController {
     override func loadView() {
         let view = addView()
         
@@ -153,7 +157,7 @@ class SecondViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
         
-}   // [END] of SecondViewController
+}   // [END] of IntroductionViewController
 
 
 
