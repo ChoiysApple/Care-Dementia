@@ -811,14 +811,41 @@ class TestinfoViewController: UIViewController {
             descriptionLabel2.topAnchor.constraint(equalTo: nameLabel2.bottomAnchor, constant: 0),
             descriptionLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10)
         ])
-
+        
+        
+        let button1 = addButton(descriptions.testinfo_button1)
+        button1.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        
+        view.addSubview(button1)
+        NSLayoutConstraint.activate([
+            button1.widthAnchor.constraint(equalToConstant: 200),
+            button1.heightAnchor.constraint(equalToConstant: 50),
+            button1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
+        ])
+        
+        let button2 = addButton(descriptions.testinfo_button2)
+        button2.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        
+        view.addSubview(button2)
+        NSLayoutConstraint.activate([
+            button2.widthAnchor.constraint(equalToConstant: 200),
+            button2.heightAnchor.constraint(equalToConstant: 50),
+            button2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: -10)
+        ])
         
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = SymptomsCheckViewController()
         
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if sender.titleLabel?.text == descriptions.testinfo_button1 {
+            self.navigationController?.pushViewController(SymptomsCheckViewController(), animated: true)
+
+        } else {
+            self.navigationController?.pushViewController(MMSEViewController(), animated: true)
+        }
+        
     }
 }
 
@@ -839,6 +866,21 @@ class SymptomsCheckViewController: UIViewController {
         
         scrollView.addSubview(view)
         self.view = scrollView
+    }
+}
+
+class MMSEViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let view = addView()
+        
+        
+        let title = addHeading("MMSE")
+        view.addSubview(title)
+        
+        self.view = view
     }
 }
 
