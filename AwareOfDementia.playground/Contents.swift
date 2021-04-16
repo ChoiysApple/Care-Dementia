@@ -22,13 +22,22 @@ class TitleViewController: UIViewController {
     
     override func loadView() {
         let view = addView()
+        
+        
+        // center Emoji
+        let centerEmoji = addEmoji(descriptions.title_emoji, 120)
+        view.addSubview(centerEmoji)
+        NSLayoutConstraint.activate([
+            centerEmoji.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            centerEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
 
         // title
         let titleLabel = addHeading(descriptions.title_heading)
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: centerEmoji.bottomAnchor, constant: 20)
         ])
         
         // Divider
@@ -41,26 +50,14 @@ class TitleViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
 
-        
-        // center Emoji
-        let centerEmoji = addEmoji(descriptions.title_emoji, 150)
-        view.addSubview(centerEmoji)
-        NSLayoutConstraint.activate([
-            centerEmoji.heightAnchor.constraint(equalToConstant: 300),
-            centerEmoji.widthAnchor.constraint(equalToConstant: 300),
-            centerEmoji.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -10),
-            centerEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
         // button
-
         let nextButton = addButton(descriptions.title_button)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 100),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
