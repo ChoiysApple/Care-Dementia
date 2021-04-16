@@ -142,7 +142,7 @@ class IntroductionViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
-            nextButton.widthAnchor.constraint(equalToConstant: 100),
+            nextButton.widthAnchor.constraint(equalToConstant: 120),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
             nextButton.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 50),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
