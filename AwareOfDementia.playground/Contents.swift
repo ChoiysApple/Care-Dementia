@@ -879,7 +879,7 @@ class TestinfoViewController: UIViewController {
 class SelfAssessmentViewController: UIViewController {
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
-    let checkboxes: [UIButton]
+    let checkboxes: [UIButton] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
