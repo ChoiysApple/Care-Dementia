@@ -65,18 +65,6 @@ public struct descriptions {
     public static let testinfo_button2 = "Start MMSE"
     
     public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
-    public static let self_questions = [
-        "Do you ever forget information that you have learned recently?",
-        "Do you have to ask for the same information again or need reminder notes?",
-        "Do you have trouble following instructions, like a recipe or directions?",
-        "Do you struggle to keep track of finances or pay bills on time?",
-        "Do you experience visual problems, such as trouble with reading or judging distance or color?",
-        "Do you find yourself becoming confused in the middle of a conversation and having to stop?",
-        "Do you struggle to remember words, date, or events?",
-        "Do you lose things and/or sense that people have stolen them?",
-        "Do you struggle to remember to keep yourself clean or practice good hygiene?",
-        "Have you or others noticed changes in your personality, such as becoming easily upset or anxious?"
-    ]
 }
 
 public struct data {
@@ -94,5 +82,18 @@ public struct data {
         "80 ~ 84  |  20% of prevelence",
         "Over 85  |  40% of prevelence"
     ]
+    
+    public static let assessment_questions = [
+            "Do you ever forget information that you have learned recently?",
+            "Do you have to ask for the same information again or need reminder notes?",
+            "Do you have trouble following instructions, like a recipe or directions?",
+            "Do you struggle to keep track of finances or pay bills on time?",
+            "Do you experience visual problems, such as trouble with reading or judging distance or color?",
+            "Do you find yourself becoming confused in the middle of a conversation and having to stop?",
+            "Do you struggle to remember words, date, or events?",
+            "Do you lose things and/or sense that people have stolen them?",
+            "Do you struggle to remember to keep yourself clean or practice good hygiene?",
+            "Have you or others noticed changes in your personality, such as becoming easily upset or anxious?"
+        ]
 
 }

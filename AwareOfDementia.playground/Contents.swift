@@ -867,7 +867,7 @@ class TestinfoViewController: UIViewController {
     @objc func nextButtonTapped(_ sender: UIButton) {
         
         if sender.titleLabel?.text == descriptions.testinfo_button1 {
-            self.navigationController?.pushViewController(SymptomsCheckViewController(), animated: true)
+            self.navigationController?.pushViewController(SelfAssessmentViewController(), animated: true)
 
         } else {
             self.navigationController?.pushViewController(MMSEViewController(), animated: true)
@@ -876,12 +876,14 @@ class TestinfoViewController: UIViewController {
     }
 }
 
-class SymptomsCheckViewController: UIViewController {
+class SelfAssessmentViewController: UIViewController {
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
+    let checkboxes: [UIButton]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.tintColor = customColor.tint
         self.navigationController?.navigationBar.backgroundColor = customColor.main
@@ -894,7 +896,6 @@ class SymptomsCheckViewController: UIViewController {
         scrollView.contentSize = view.frame.size
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = customColor.main
-        
 
         
         // Description
@@ -916,6 +917,8 @@ class SymptomsCheckViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+
+        
         scrollView.addSubview(view)
         self.view = scrollView
     }
@@ -926,6 +929,8 @@ class SymptomsCheckViewController: UIViewController {
            self.navigationController?.isNavigationBarHidden = true
        }
 }
+
+
 
 class MMSEViewController: UIViewController {
     
