@@ -7,7 +7,6 @@ import UIKit
 import PlaygroundSupport
 
 
-
 // Main
 let firstVC = FirstViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
@@ -350,8 +349,6 @@ extension ThirdViewController: UICollectionViewDataSource {
 
        return cell
    }
-    
-
 }
 
 // custom methods
@@ -731,14 +728,17 @@ class FifthViewController: UIViewController {
 // Self-diagnosis for dementia
 class SixthViewController: UIViewController {
     
+
+    let contentViewHeight = 2000
+    let scrollView = UIScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let view = addScrollContentView(height: 2000)
-
-        let scrollView = UIScrollView()
+        
         scrollView.contentSize = view.frame.size
-        scrollView.addSubview(view)
+        
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = .white
         
@@ -763,20 +763,19 @@ class SixthViewController: UIViewController {
             }()
         
         view.addSubview(titleLabel)
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4).isActive = true
         view.addSubview(subtitleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4),
-            subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
-            subtitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4),
-            subtitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25).isActive = true
+        subtitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4).isActive = true
+        subtitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-
+        scrollView.addSubview(view)
         self.view = scrollView
     }
+    
 }
 
 
