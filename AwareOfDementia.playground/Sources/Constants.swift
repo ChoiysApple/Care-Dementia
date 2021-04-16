@@ -51,7 +51,12 @@ public struct descriptions {
     public static let benefits_description4 = "Families can make long-term plans and be prepared in advance."
     public static let benefits_button = "I get it. Then how can I detect Dementia?"
 
-    
+    public static let testinfo_title = "Try 2 Ways of Dementia tests for you"
+    public static let testinfo_introduction = "Most of us are not Psychiatrists.                                              So this app can help you testing Dementia"
+    public static let testinfo_guide = "Try testing yourself or your family members"
+    public static let testinfo_emoji1 = "✅"
+    public static let testinfo_test1 = "1. Self-Assessment Test"
+    public static let testinfo_description1 = "Check symptoms using life-experiences related questions common people with dementia."
 }
 
 public struct data {

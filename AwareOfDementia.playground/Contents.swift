@@ -8,7 +8,7 @@ import PlaygroundSupport
 
 
 // Main
-let firstVC = TitleViewController()
+let firstVC = TestinfoViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -728,7 +728,67 @@ class TestinfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // title
+        let titleLabel = addHeading(descriptions.testinfo_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let introductionLabel = addDescription(descriptions.testinfo_introduction)
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     
+        let guideLabel = addDescription(descriptions.testinfo_guide)
+        guideLabel.font = UIFont(name: "AvenirNext-bold", size: UIFont.labelFontSize)
+        view.addSubview(guideLabel)
+        NSLayoutConstraint.activate([
+            guideLabel.widthAnchor.constraint(equalToConstant: 400),
+            guideLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 20),
+            guideLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Emoji + Description1
+        let emoji1 = addEmojiButton(descriptions.testinfo_emoji1, 50)
+        view.addSubview(emoji1)
+        NSLayoutConstraint.activate([
+            emoji1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 35),
+            emoji1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        let nameLabel1 = addDescription(descriptions.testinfo_test1)
+        let descriptionLabel1 = addDescription(descriptions.testinfo_description1)
+        nameLabel1.font = UIFont(name: "AvenirNext-bold", size: UIFont.labelFontSize)
+        descriptionLabel1.font = UIFont(name: "AvenirNext-regular", size: 15)
+        view.addSubview(nameLabel1)
+        view.addSubview(descriptionLabel1)
+        NSLayoutConstraint.activate([
+            nameLabel1.widthAnchor.constraint(equalToConstant: 350),
+            nameLabel1.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 40),
+            nameLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10),
+            
+            descriptionLabel1.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel1.topAnchor.constraint(equalTo: nameLabel1.bottomAnchor, constant: 0),
+            descriptionLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
+        ])
+
+        
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
@@ -748,9 +808,8 @@ class SymptomsCheckViewController: UIViewController {
         let view = addScrollContentView(height: 2000)
         
         scrollView.contentSize = view.frame.size
-        
         scrollView.flashScrollIndicators()
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = customColor.main
         
         
         
