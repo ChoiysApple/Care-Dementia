@@ -8,7 +8,7 @@ import PlaygroundSupport
 
 
 // Main
-let firstVC = TestinfoViewController()
+let firstVC = TitleViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -52,14 +52,25 @@ class TitleViewController: UIViewController {
 
         // button
         let nextButton = addButton(descriptions.title_button)
+        nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 25)
         nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
-            nextButton.widthAnchor.constraint(equalToConstant: 100),
+            nextButton.widthAnchor.constraint(equalToConstant: 300),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            nextButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 80),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        let skipButton = addSkipButton(descriptions.title_skipButton)
+        skipButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(skipButton)
+        NSLayoutConstraint.activate([
+            skipButton.heightAnchor.constraint(equalToConstant: 50),
+            skipButton.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 20),
+            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
         
         self.view = view
     }   // [END] of loadView
@@ -869,7 +880,14 @@ class SymptomsCheckViewController: UIViewController {
         super.viewDidLoad()
         
         let view = addScrollContentView(height: 2000)
-        
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.tintColor = customColor.tint
+        self.navigationController?.navigationBar.backgroundColor = customColor.main
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.clipsToBounds = true
+        self.title = "Self-Assessment Test"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+
         scrollView.contentSize = view.frame.size
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = customColor.main
@@ -879,6 +897,12 @@ class SymptomsCheckViewController: UIViewController {
         scrollView.addSubview(view)
         self.view = scrollView
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+
+           self.navigationController?.isNavigationBarHidden = true
+       }
 }
 
 class MMSEViewController: UIViewController {
@@ -955,6 +979,18 @@ func addButton(_ button: String) -> UIButton {
     
     return nextButton
 }
+
+func addSkipButton(_ button: String) -> UIButton {
+    let nextButton = UIButton()
+    nextButton.translatesAutoresizingMaskIntoConstraints = false
+    nextButton.titleLabel?.font = UIFont(name: "AvenirNext-regular", size: 13)
+    nextButton.setTitle(button, for: .normal)
+    nextButton.setTitleColor(UIColor.black, for: .normal)
+    nextButton.layer.cornerRadius = 10
+    
+    return nextButton
+}
+
 
 func addDescription(_ description: String) -> UILabel {
     let descriptionLabel = UILabel()
