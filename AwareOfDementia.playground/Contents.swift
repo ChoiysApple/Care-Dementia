@@ -25,7 +25,7 @@ class TitleViewController: UIViewController {
         
         
         // center Emoji
-        let centerEmoji = addEmoji(descriptions.title_emoji, 120)
+        let centerEmoji = addEmoji(descriptions.title_emoji, 80)
         view.addSubview(centerEmoji)
         NSLayoutConstraint.activate([
             centerEmoji.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
@@ -46,7 +46,7 @@ class TitleViewController: UIViewController {
         NSLayoutConstraint.activate([
             divider.widthAnchor.constraint(equalToConstant: 400),
             divider.heightAnchor.constraint(equalToConstant: 1),
-            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
 
