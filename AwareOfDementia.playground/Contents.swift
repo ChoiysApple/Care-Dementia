@@ -8,7 +8,7 @@ import PlaygroundSupport
 
 
 // Main
-let firstVC = FirstViewController()
+let firstVC = TitleViewController()
 let navVC = UINavigationController(rootViewController: firstVC)
 
 navVC.setNavigationBarHidden(true, animated: false)
@@ -18,7 +18,7 @@ navVC.view.frame = CGRect(x: 0, y: 0, width: 480, height: 720)
 PlaygroundPage.current.liveView = navVC.view
 
 // Title Page
-class FirstViewController: UIViewController {
+class TitleViewController: UIViewController {
     
     override func loadView() {
         let view = addView()
@@ -73,7 +73,7 @@ class FirstViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-}   // [END] of ThirdViewController
+}   // [END] of StastisticsViewController
 
 // Introduction Page
 class SecondViewController: UIViewController {
@@ -140,7 +140,7 @@ class SecondViewController: UIViewController {
     }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = ThirdViewController()
+        let nextVC = StastisticsViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -150,7 +150,7 @@ class SecondViewController: UIViewController {
 
 
 // Show how much old people commomly get Dementia by
-class ThirdViewController: UIViewController {
+class StastisticsViewController: UIViewController {
     
     var sliderValue = 64
     var currentAgeCode = 0
@@ -303,7 +303,7 @@ class ThirdViewController: UIViewController {
     }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = FourthViewController()
+        let nextVC = AwarenessViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -328,10 +328,10 @@ class ThirdViewController: UIViewController {
     
 
     
-}   // [END] of ThirdViewController
+}   // [END] of StastisticsViewController
 
 // Collection View Data Source
-extension ThirdViewController: UICollectionViewDataSource {
+extension StastisticsViewController: UICollectionViewDataSource {
    // CollectionView DataSource Protocol stubs
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return 14
@@ -352,7 +352,7 @@ extension ThirdViewController: UICollectionViewDataSource {
 }
 
 // custom methods
-extension ThirdViewController {
+extension StastisticsViewController {
     
     func getAgeCode(age: Int) -> Int {
         if age > 64 && age < 75 {return 1 }
@@ -381,7 +381,7 @@ extension ThirdViewController {
 }
 
 // Why Dementia is even related to young people
-class FourthViewController: UIViewController {
+class AwarenessViewController: UIViewController {
     
     var isAllTapped = [false, false, false]
     
@@ -532,7 +532,7 @@ class FourthViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = FifthViewController()
+        let nextVC = BenefitViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -548,10 +548,10 @@ class FourthViewController: UIViewController {
         conclusionEmoji.isHidden = false
     }
     
-}   // [END] of ThirdViewController
+}   // [END] of StastisticsViewController
 
 // Benefits of diagnosing Dementia in advance
-class FifthViewController: UIViewController {
+class BenefitViewController: UIViewController {
     
     var isAllTapped = [false, false, false, false]
     
@@ -707,7 +707,7 @@ class FifthViewController: UIViewController {
     
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = SixthViewController()
+        let nextVC = TestViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -725,10 +725,23 @@ class FifthViewController: UIViewController {
     
 }
 
-// Self-diagnosis for dementia
-class SixthViewController: UIViewController {
+// Test introduciton for dementia
+class TestViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let nextVC = SelfViewController()
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
 
+class SelfViewController: UIViewController {
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
     
@@ -742,45 +755,12 @@ class SixthViewController: UIViewController {
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = .white
         
-        let titleLabel: UILabel = {
-                let label = UILabel()
-                label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                label.numberOfLines = 0
-                label.sizeToFit()
-                label.textColor = UIColor.black
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            
-            let subtitleLabel: UILabel = {
-                let label = UILabel()
-                label.text = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-                label.numberOfLines = 0
-                label.sizeToFit()
-                label.textColor = UIColor.black
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
         
-        view.addSubview(titleLabel)
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4).isActive = true
-        view.addSubview(subtitleLabel)
-        subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25).isActive = true
-        subtitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4).isActive = true
-        subtitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
+        
         scrollView.addSubview(view)
         self.view = scrollView
     }
-    
 }
-
-
-
-
 
 //Custom functions for UI
 func addView() -> UIView {
