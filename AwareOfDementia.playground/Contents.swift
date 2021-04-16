@@ -704,7 +704,7 @@ class BenefitViewController: UIViewController {
     
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = TestViewController()
+        let nextVC = TestinfoViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -723,7 +723,7 @@ class BenefitViewController: UIViewController {
 }
 
 // Test introduciton for dementia
-class TestViewController: UIViewController {
+class TestinfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -732,13 +732,13 @@ class TestViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let nextVC = SelfViewController()
+        let nextVC = SymptomsCheckViewController()
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
-class SelfViewController: UIViewController {
+class SymptomsCheckViewController: UIViewController {
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
     
