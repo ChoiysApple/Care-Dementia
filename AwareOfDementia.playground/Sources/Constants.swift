@@ -63,6 +63,9 @@ public struct descriptions {
     public static let testinfo_description2 = "Methods psychiatrists use for screening dementia.                        This app provide simplified version"
     public static let testinfo_button1 = "Start Self-Assessment"
     public static let testinfo_button2 = "Start MMSE"
+    
+    public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
+    
 }
 
 public struct data {

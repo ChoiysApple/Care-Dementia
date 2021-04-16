@@ -76,7 +76,7 @@ class TitleViewController: UIViewController {
     }   // [END] of loadView
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        if sender.titleLabel?.text == descriptions.testinfo_button1 {
+        if sender.titleLabel?.text == descriptions.title_button {
             self.navigationController?.pushViewController(IntroductionViewController(), animated: true)
 
         } else {
@@ -882,8 +882,6 @@ class SymptomsCheckViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let view = addScrollContentView(height: 2000)
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.tintColor = customColor.tint
         self.navigationController?.navigationBar.backgroundColor = customColor.main
@@ -891,12 +889,32 @@ class SymptomsCheckViewController: UIViewController {
         self.navigationController?.navigationBar.clipsToBounds = true
         self.title = "Self-Assessment Test"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-
+        
+        let view = addScrollContentView(height: 2000)
         scrollView.contentSize = view.frame.size
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = customColor.main
         
+
         
+        // Description
+        let guideLabel = addDescription(descriptions.self.self_guide)
+        view.addSubview(guideLabel)
+        NSLayoutConstraint.activate([
+            guideLabel.widthAnchor.constraint(equalToConstant: 400),
+            guideLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            guideLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         scrollView.addSubview(view)
         self.view = scrollView
