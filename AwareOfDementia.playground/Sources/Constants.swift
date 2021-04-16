@@ -57,6 +57,11 @@ public struct descriptions {
     public static let testinfo_emoji1 = "✅"
     public static let testinfo_test1 = "1. Self-Assessment Test"
     public static let testinfo_description1 = "Check symptoms using life-experiences related questions common people with dementia."
+    public static let testinfo_emoji2 = "👨🏻‍⚕️"
+    public static let testinfo_test2 = "2. Mini-Mental State Examination"
+    public static let testinfo_description2 = "Methods psychiatrists use for screening dementia.                        This app provide simplified version"
+    
+    
 }
 
 public struct data {

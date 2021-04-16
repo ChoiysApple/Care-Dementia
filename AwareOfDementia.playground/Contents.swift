@@ -749,6 +749,7 @@ class TestinfoViewController: UIViewController {
         
         // Description
         let introductionLabel = addDescription(descriptions.testinfo_introduction)
+        introductionLabel.font = UIFont(name: "AvenirNext-regular", size: 15)
         view.addSubview(introductionLabel)
         NSLayoutConstraint.activate([
             introductionLabel.widthAnchor.constraint(equalToConstant: 400),
@@ -757,7 +758,7 @@ class TestinfoViewController: UIViewController {
         ])
     
         let guideLabel = addDescription(descriptions.testinfo_guide)
-        guideLabel.font = UIFont(name: "AvenirNext-bold", size: UIFont.labelFontSize)
+        guideLabel.font = UIFont(name: "AvenirNext-medium", size: UIFont.labelFontSize)
         view.addSubview(guideLabel)
         NSLayoutConstraint.activate([
             guideLabel.widthAnchor.constraint(equalToConstant: 400),
@@ -786,6 +787,29 @@ class TestinfoViewController: UIViewController {
             descriptionLabel1.widthAnchor.constraint(equalToConstant: 350),
             descriptionLabel1.topAnchor.constraint(equalTo: nameLabel1.bottomAnchor, constant: 0),
             descriptionLabel1.leftAnchor.constraint(equalTo: emoji1.rightAnchor, constant: 10)
+        ])
+        
+        // Emoji + Description2
+        let emoji2 = addEmojiButton(descriptions.testinfo_emoji2, 50)
+        view.addSubview(emoji2)
+        NSLayoutConstraint.activate([
+            emoji2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 35),
+            emoji2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40)
+        ])
+        let nameLabel2 = addDescription(descriptions.testinfo_test2)
+        let descriptionLabel2 = addDescription(descriptions.testinfo_description2)
+        nameLabel2.font = UIFont(name: "AvenirNext-bold", size: UIFont.labelFontSize)
+        descriptionLabel2.font = UIFont(name: "AvenirNext-regular", size: 15)
+        view.addSubview(nameLabel2)
+        view.addSubview(descriptionLabel2)
+        NSLayoutConstraint.activate([
+            nameLabel2.widthAnchor.constraint(equalToConstant: 350),
+            nameLabel2.topAnchor.constraint(equalTo: descriptionLabel1.bottomAnchor, constant: 40),
+            nameLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10),
+            
+            descriptionLabel2.widthAnchor.constraint(equalToConstant: 350),
+            descriptionLabel2.topAnchor.constraint(equalTo: nameLabel2.bottomAnchor, constant: 0),
+            descriptionLabel2.leftAnchor.constraint(equalTo: emoji2.rightAnchor, constant: 10)
         ])
 
         
