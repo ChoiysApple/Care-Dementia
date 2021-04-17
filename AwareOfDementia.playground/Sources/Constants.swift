@@ -6,11 +6,11 @@ public struct customColor {
     public static let main = #colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
     public static let tint = #colorLiteral(red: 0.4470588235, green: 0.4392156863, blue: 0.4235294118, alpha: 1)
     public static let alertColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+    public static let resultColor = [#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)]
     
     public static let defaultImage = UIImage(systemName: "checkmark.square")
     public static let checkedImage = UIImage(systemName: "checkmark.square.fill")
-    
-    public static let resultColor = [#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)]
+    public static let speechImage = UIImage(systemName: "mic.circle.fill")
 }
 
 public struct descriptions {
@@ -82,6 +82,8 @@ public struct descriptions {
     
     public static let mmse_title = "Simplified MMSE Test"
     public static let mmse_introduciton = "I'm going to ask you a few questions to learn about memory and concentration. Some of the questions are easy, but some may be difficult. You can do as much as you can."
+    public static let mmse_guide = "Every questions will spoken in voice.                       You can hear it again pressing button below"
+    public static let mmse_button = "Start Test"
 }
 
 public struct data {

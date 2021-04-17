@@ -1140,7 +1140,7 @@ class MMSEViewController: UIViewController {
         
         // Description
         let introductionLabel = addDescription(descriptions.mmse_introduciton)
-        introductionLabel.font = UIFont(name: "AvenirNext-regular", size: 15)
+        introductionLabel.font = UIFont(name: "AvenirNext-regular", size: UIFont.labelFontSize)
         view.addSubview(introductionLabel)
         NSLayoutConstraint.activate([
             introductionLabel.widthAnchor.constraint(equalToConstant: 400),
@@ -1148,7 +1148,71 @@ class MMSEViewController: UIViewController {
             introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        let guideLabel = addDescription(descriptions.mmse_guide)
+        guideLabel.font = UIFont(name: "AvenirNext-medium", size: UIFont.labelFontSize)
+        view.addSubview(guideLabel)
+        NSLayoutConstraint.activate([
+            guideLabel.widthAnchor.constraint(equalToConstant: 400),
+            guideLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 50),
+            guideLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+
+        // Speech Symbol
+        let imageView = addSpeechImage()
+        view.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 100),
+            imageView.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 50)
+        ])
+        
+        // Speech Button
+        let speechButton = UIButton()
+        speechButton.translatesAutoresizingMaskIntoConstraints = false
+        speechButton.addTarget(self, action: #selector(speechButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(speechButton)
+        NSLayoutConstraint.activate([
+            speechButton.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+            speechButton.heightAnchor.constraint(equalTo: imageView.heightAnchor),
+            speechButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            speechButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+        ])
+        
+        let speechLabel = addDescription("⬆️ Press this button")
+        speechLabel.translatesAutoresizingMaskIntoConstraints = false
+        speechLabel.font = UIFont(name: "AvenirNext-medium", size: 15)
+        view.addSubview(speechLabel)
+        NSLayoutConstraint.activate([
+            speechLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            speechLabel.topAnchor.constraint(equalTo: speechButton.bottomAnchor, constant: 5)
+        ])
+        
+        // Button
+        let nextButton = addButton(descriptions.mmse_button)
+        nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 400),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        
         self.view = view
+    }
+    
+    @objc func speechButtonTapped(_ sender: UIButton) {
+        print("Speech")
+        textToSpeech(descriptions.mmse_guide)
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+
+        print("Next")
     }
 }
 
@@ -1263,12 +1327,21 @@ func addCheckBox(_ title: String) -> UIButton{
     return button
 }
 
+func addSpeechImage() -> UIImageView {
+    let imageView = UIImageView()
+    imageView.image = customColor.speechImage
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.tintColor = customColor.tint
+    
+    return imageView
+}
+
 // TTS method
 func textToSpeech(_ text: String){
     let synthesizer = AVSpeechSynthesizer()
     let utterance = AVSpeechUtterance(string: text)
 
     utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-    utterance.rate = 0.4
+    utterance.rate = 0.5
     synthesizer.speak(utterance)
 }
