@@ -10,7 +10,7 @@ public struct customColor {
     public static let defaultImage = UIImage(systemName: "checkmark.square")
     public static let checkedImage = UIImage(systemName: "checkmark.square.fill")
     
-    public static let resultColor = [#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)]
+    public static let resultColor = [#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)]
 }
 
 public struct descriptions {
@@ -72,7 +72,7 @@ public struct descriptions {
     public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
     public static let self_button = "Finish test and check result"
     
-    public static let selfresult_title = ["Little or No Indication of Dementia", "Mild Indication of Dementia", "Strong Indication of Dementia"]
+    public static let selfresult_title = ["Little or No Indication of Dementia     ", "        Mild Indication of Dementia     ", "        Strong Indication of Dementia       "]
     public static let selfresult_introduciton = ["Suspect no cognitive impairment", "Suspect mild cognitive impairment, which is at risk of dementia.", "Suspect high possibility of dementia now."]
     public static let selfresult_Description = ["It doesn't look like dementia. But still be aware of risk of Dementia", "Hardness cognitive impairment is not dementia, but a significantly reduced level of memory compared to other people with similar age and educational background, and the rate of progression to dementia is about 10-15%.", "Seems like dementia. Highly suggest to get Dementia early selection test"]
     public static let selfresult_conclusion = ["Don't have to worry about dementia right now.", "Recommand to get a consultation on your current condition.", "Must get a consultation on your current condition."]

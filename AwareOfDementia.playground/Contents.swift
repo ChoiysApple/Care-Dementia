@@ -999,7 +999,48 @@ class SelfAssessmentResultViewController: UIViewController {
         let view = addView()
         let resultCode = getResultCode(testData.testScore)
         
-        print(resultCode)
+        // title
+        let titleLabel = addHeading(descriptions.selfresult_title[resultCode])
+        titleLabel.backgroundColor = customColor.resultColor[resultCode]
+        titleLabel.clipsToBounds = true
+        titleLabel.layer.cornerRadius = 20
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let introductionLabel = addDescription(descriptions.selfresult_introduciton[resultCode])
+        introductionLabel.font = UIFont(name: "AvenirNext-bold", size: 20)
+        introductionLabel.textAlignment = .center
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let descriptionLabel = addDescription(descriptions.selfresult_Description[resultCode])
+        view.addSubview(descriptionLabel)
+        NSLayoutConstraint.activate([
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
+            descriptionLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 40),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         
         self.view = view
