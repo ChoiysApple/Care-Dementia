@@ -5,7 +5,7 @@
 
 import UIKit
 import PlaygroundSupport
-
+import AVFoundation
 
 // Main
 let firstVC = TitleViewController()
@@ -1261,4 +1261,14 @@ func addCheckBox(_ title: String) -> UIButton{
     button.isSelected = false
     
     return button
+}
+
+// TTS method
+func textToSpeech(_ text: String){
+    let synthesizer = AVSpeechSynthesizer()
+    let utterance = AVSpeechUtterance(string: text)
+
+    utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+    utterance.rate = 0.4
+    synthesizer.speak(utterance)
 }
