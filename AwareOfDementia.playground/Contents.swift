@@ -971,6 +971,7 @@ class SelfAssessmentViewController: UIViewController {
            self.navigationController?.isNavigationBarHidden = true
        }
     
+    
     // Checkbox aciton
     @objc func checkboxTapped(_ sender: UIButton) {
         let selected = sender.isSelected
@@ -978,7 +979,15 @@ class SelfAssessmentViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        self.navigationController?.pushViewController(SelfAssessmentViewController(), animated: true)
+        var score = 0
+        for i in checkboxes {
+            if i.isSelected {
+                score += 1
+            }
+        }
+        
+        testData.testScore = score
+        self.navigationController?.pushViewController(SelfAssessmentResultViewController(), animated: true)
     }
 }
 
@@ -989,7 +998,9 @@ class SelfAssessmentResultViewController: UIViewController {
         
         let view = addView()
         
-        let title = addHeading("Result")
+        
+        let testScore = testData.testScore
+        let title = addHeading("Result = \(testScore)")
         view.addSubview(title)
         
         self.view = view

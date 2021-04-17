@@ -100,3 +100,7 @@ public struct data {
             "Have you or others noticed changes in your personality, such as becoming easily upset or anxious?"
         ]
 }
+
+public struct testData {
+    public static var testScore = 0
+}
