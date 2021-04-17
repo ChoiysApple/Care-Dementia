@@ -882,7 +882,7 @@ class SelfAssessmentViewController: UIViewController {
     
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
-    let checkboxes: [UIButton] = []
+    var checkboxes = [UIButton]()
     
     
     override func viewDidLoad() {
@@ -921,14 +921,37 @@ class SelfAssessmentViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        for i in data.assessment_questions {
-            print(i)
+        for i in 0...questionList.count-1 {
+            let newCheckbox = addCheckBox(questionList[i])
+            newCheckbox.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+            checkboxes.append(newCheckbox)
+            view.addSubview(checkboxes[i])
+            
+            var upperObject: UIView
+            var upperConstant: CGFloat
+            
+            // First checkbox
+            if i == 0 {
+                upperObject = divider
+                upperConstant = 30
+                
+            } else {
+                upperObject = checkboxes[i-1]
+                upperConstant = 20
+            }
+            
+            NSLayoutConstraint.activate([
+                newCheckbox.topAnchor.constraint(equalTo: upperObject.bottomAnchor, constant: upperConstant),
+                newCheckbox.leftAnchor.constraint(equalTo: upperObject.leftAnchor, constant: 0),
+                newCheckbox.widthAnchor.constraint(lessThanOrEqualToConstant: 400),
+                newCheckbox.heightAnchor.constraint(equalToConstant: 50),
+            ])
         }
         
 
         
         scrollView.addSubview(view)
-        self.view = scrollView
+       self.view = scrollView
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -936,6 +959,12 @@ class SelfAssessmentViewController: UIViewController {
 
            self.navigationController?.isNavigationBarHidden = true
        }
+    
+    // Checkbox aciton
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let selected = sender.isSelected
+        sender.isSelected = !selected
+    }
 }
 
 
@@ -1055,8 +1084,14 @@ func addCheckBox(_ title: String) -> UIButton{
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setImage(customColor.defaultImage, for: .normal)
     button.setImage(customColor.checkedImage, for: .selected)
-    button.setTitle("Checkbox", for: .normal)
-    button.setTitle("Selected", for: .selected)
+    button.setTitle(title, for: .normal)
+    button.setTitle(title, for: .selected)
+    button.titleLabel?.font = UIFont(name: "AvenirNext-regular", size: 16)
+    button.titleLabel?.numberOfLines = 0
+    button.contentHorizontalAlignment = .left
+    button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+
+
     button.isSelected = false
     
     return button

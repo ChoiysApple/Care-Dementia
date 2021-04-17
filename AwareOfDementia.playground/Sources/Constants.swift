@@ -98,5 +98,4 @@ public struct data {
             "Do you struggle to remember to keep yourself clean or practice good hygiene?",
             "Have you or others noticed changes in your personality, such as becoming easily upset or anxious?"
         ]
-
 }
