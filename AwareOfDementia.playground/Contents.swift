@@ -1119,9 +1119,34 @@ class MMSEViewController: UIViewController {
         
         let view = addView()
         
+        // title
+        let titleLabel = addHeading(descriptions.mmse_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
-        let title = addHeading("MMSE")
-        view.addSubview(title)
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let introductionLabel = addDescription(descriptions.mmse_introduciton)
+        introductionLabel.font = UIFont(name: "AvenirNext-regular", size: 15)
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         self.view = view
     }

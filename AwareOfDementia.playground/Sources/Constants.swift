@@ -79,6 +79,9 @@ public struct descriptions {
     public static let selfresult_conclusion = ["Don't have to worry about dementia right now.", "Recommand to get a consultation on your current condition.", "Must get a consultation on your current condition."]
     public static let selfresult_button1 = "To title page"
     public static let selfresult_button2 = "Test Selection"
+    
+    public static let mmse_title = "Simplified MMSE Test"
+    public static let mmse_introduciton = "I'm going to ask you a few questions to learn about memory and concentration. Some of the questions are easy, but some may be difficult. You can do as much as you can."
 }
 
 public struct data {
@@ -114,9 +117,6 @@ public struct data {
         ]
     
     public struct MMSE_questions {
-        public static let title = "Simplified MMSE Test"
-        public static let introduciton = "I'm going to ask you a few questions to learn about memory and concentration. Some of the questions are easy, but some may be difficult. You can do as much as you can."
-        
         // First Strings of each arrys are title of question group
         public static let time = ["What year is it this year?", "What season is it now?", "What's today's date?", "What day is it today?", "What month is it now?"]
         public static let memory = ["I'll tell you the names of the three items. Listen until the end and name all three things.And in a few minutes, we'll ask you the names of those three objects again, so remember the names of the objects you've heard.", "Please tell me the names of the three items I told you to remember a while ago."]
