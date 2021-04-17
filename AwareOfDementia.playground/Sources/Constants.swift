@@ -9,6 +9,8 @@ public struct customColor {
     
     public static let defaultImage = UIImage(systemName: "checkmark.square")
     public static let checkedImage = UIImage(systemName: "checkmark.square.fill")
+    
+    public static let resultColor = [#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)]
 }
 
 public struct descriptions {
@@ -70,23 +72,12 @@ public struct descriptions {
     public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
     public static let self_button = "Finish test and check result"
     
-    // Low Indication
-    public static let selfresult_title1 = "Little or No Indication of Dementia"
-    public static let selfresult_introduciton1 = "Suspect no cognitive impairment"
-    public static let selfresult_Description1 = "It doesn't look like dementia. But still be aware of risk of Dementia"
-    public static let selfresult_conclusion1 = "Don't have to worry about dementia right now."
+    public static let selfresult_title = ["Little or No Indication of Dementia", "Mild Indication of Dementia", "Strong Indication of Dementia"]
+    public static let selfresult_introduciton = ["Suspect no cognitive impairment", "Suspect mild cognitive impairment, which is at risk of dementia.", "Suspect high possibility of dementia now."]
+    public static let selfresult_Description = ["It doesn't look like dementia. But still be aware of risk of Dementia", "Hardness cognitive impairment is not dementia, but a significantly reduced level of memory compared to other people with similar age and educational background, and the rate of progression to dementia is about 10-15%.", "Seems like dementia. Highly suggest to get Dementia early selection test"]
+    public static let selfresult_conclusion = ["Don't have to worry about dementia right now.", "Recommand to get a consultation on your current condition.", "Must get a consultation on your current condition."]
     
-    // Mild Indication
-    public static let selfresult_title2 = "Mild Indication of Dementia"
-    public static let selfresult_introduciton2 = "Suspect mild cognitive impairment, which is at risk of dementia."
-    public static let selfresult_Description2 = "Hardness cognitive impairment is not dementia, but a significantly reduced level of memory compared to other people with similar age and educational background, and the rate of progression to dementia is about 10-15%."
-    public static let selfresult_conclusion2 = "Recommand to get a consultation on your current condition."
-
-    // High Indication
-    public static let selfresult_title3 = "Strong Indication of Dementia"
-    public static let selfresult_introduciton3 = "Suspect high possibility of dementia now."
-    public static let selfresult_Description3 = "Seems like dementia. Highly suggest to get Dementia early selection test"
-    public static let selfresult_conclusion3 = "Must get a consultation on your current condition."
+    
 
 }
 
@@ -98,6 +89,8 @@ public struct data {
         [true, true, true, false, false, false, false, false, false, false, false, false, false, false],
         [true, true, true, true, false, false, false, false, false, false, false, false, false, false]
     ]
+    
+    // Statistic data from "Dementia News"
     public static let prevelence_range = [
         "Under 65 |  2% of prevelence",
         "65 ~ 74  |  4% of prevelence",
@@ -106,6 +99,7 @@ public struct data {
         "Over 85  |  40% of prevelence"
     ]
     
+    // Questions from https://www.psycom.net/dementia-test/
     public static let assessment_questions = [
             "Do you ever forget information that you have learned recently?",
             "Do you have to ask for the same information again or need reminder notes?",

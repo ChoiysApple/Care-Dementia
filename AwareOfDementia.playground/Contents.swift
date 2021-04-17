@@ -997,13 +997,22 @@ class SelfAssessmentResultViewController: UIViewController {
         super.viewDidLoad()
         
         let view = addView()
+        let resultCode = getResultCode(testData.testScore)
         
+        print(resultCode)
         
-        let testScore = testData.testScore
-        let title = addHeading("Result = \(testScore)")
-        view.addSubview(title)
         
         self.view = view
+    }
+    
+    func getResultCode(_ score: Int) -> Int {
+        if score >= 0 && score < 4 {
+            return 0
+        } else if score >= 4 && score < 7 {
+            return 1
+        } else {
+            return 2
+        }
     }
 }
 
