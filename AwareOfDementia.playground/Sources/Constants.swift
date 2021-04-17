@@ -69,6 +69,25 @@ public struct descriptions {
     
     public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
     public static let self_button = "Finish test and check result"
+    
+    // Low Indication
+    public static let selfresult_title1 = "Little or No Indication of Dementia"
+    public static let selfresult_introduciton1 = "Suspect no cognitive impairment"
+    public static let selfresult_Description1 = "It doesn't look like dementia. But still be aware of risk of Dementia"
+    public static let selfresult_conclusion1 = "Don't have to worry about dementia right now."
+    
+    // Mild Indication
+    public static let selfresult_title2 = "Mild Indication of Dementia"
+    public static let selfresult_introduciton2 = "Suspect mild cognitive impairment, which is at risk of dementia."
+    public static let selfresult_Description2 = "Hardness cognitive impairment is not dementia, but a significantly reduced level of memory compared to other people with similar age and educational background, and the rate of progression to dementia is about 10-15%."
+    public static let selfresult_conclusion2 = "Recommand to get a consultation on your current condition."
+
+    // High Indication
+    public static let selfresult_title3 = "Strong Indication of Dementia"
+    public static let selfresult_introduciton3 = "Suspect high possibility of dementia now."
+    public static let selfresult_Description3 = "Seems like dementia. Highly suggest to get Dementia early selection test"
+    public static let selfresult_conclusion3 = "Must get a consultation on your current condition."
+
 }
 
 public struct data {
