@@ -877,9 +877,13 @@ class TestinfoViewController: UIViewController {
 }
 
 class SelfAssessmentViewController: UIViewController {
+    
+    let questionList = data.assessment_questions
+    
     let contentViewHeight = 2000
     let scrollView = UIScrollView()
     let checkboxes: [UIButton] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -916,6 +920,10 @@ class SelfAssessmentViewController: UIViewController {
             divider.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: 20),
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        for i in data.assessment_questions {
+            print(i)
+        }
         
 
         
@@ -1038,4 +1046,18 @@ func addEmojiButton(_ emoji: String, _ size: Float) -> UIButton {
     emojiButton.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(size))
     
     return emojiButton
+}
+
+func addCheckBox(_ title: String) -> UIButton{
+    let button = UIButton()
+    button.tintColor = .black
+    button.setTitleColor(.black, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(customColor.defaultImage, for: .normal)
+    button.setImage(customColor.checkedImage, for: .selected)
+    button.setTitle("Checkbox", for: .normal)
+    button.setTitle("Selected", for: .selected)
+    button.isSelected = false
+    
+    return button
 }

@@ -6,6 +6,9 @@ public struct customColor {
     public static let main = #colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
     public static let tint = #colorLiteral(red: 0.4470588235, green: 0.4392156863, blue: 0.4235294118, alpha: 1)
     public static let alertColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+    
+    public static let defaultImage = UIImage(systemName: "checkmark.square")
+    public static let checkedImage = UIImage(systemName: "checkmark.square.fill")
 }
 
 public struct descriptions {
