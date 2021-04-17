@@ -1022,26 +1022,69 @@ class SelfAssessmentResultViewController: UIViewController {
             divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        // center Emoji
+        let centerEmoji = addEmoji(descriptions.selfresult_emoji[resultCode], 130)
+        view.addSubview(centerEmoji)
+        NSLayoutConstraint.activate([
+            centerEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerEmoji.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30)
+        ])
+        
         // Description
         let introductionLabel = addDescription(descriptions.selfresult_introduciton[resultCode])
         introductionLabel.font = UIFont(name: "AvenirNext-bold", size: 20)
         introductionLabel.textAlignment = .center
         view.addSubview(introductionLabel)
         NSLayoutConstraint.activate([
-            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
-            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.widthAnchor.constraint(equalToConstant: 425),
+            introductionLabel.topAnchor.constraint(equalTo: centerEmoji.bottomAnchor, constant: 20),
             introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // Description
         let descriptionLabel = addDescription(descriptions.selfresult_Description[resultCode])
+        descriptionLabel.textAlignment = .center
         view.addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
-            descriptionLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 40),
+            descriptionLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 20),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        let button1 = addButton(descriptions.selfresult_button1)
+        button1.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        button1.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: UIFont.labelFontSize)
+        view.addSubview(button1)
+        NSLayoutConstraint.activate([
+            button1.widthAnchor.constraint(equalToConstant: 200),
+            button1.heightAnchor.constraint(equalToConstant: 50),
+            button1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
+        ])
+        
+        let button2 = addButton(descriptions.selfresult_button2)
+        button2.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        button2.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: UIFont.labelFontSize)
+        view.addSubview(button2)
+        NSLayoutConstraint.activate([
+            button2.widthAnchor.constraint(equalToConstant: 200),
+            button2.heightAnchor.constraint(equalToConstant: 50),
+            button2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+        ])
+        
+        let conclusionLabel = addDescription(descriptions.selfresult_conclusion[resultCode])
+        conclusionLabel.textAlignment = .center
+        if resultCode == 2 {
+            conclusionLabel.textColor = customColor.alertColor
+        }
+        conclusionLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
+        view.addSubview(conclusionLabel)
+        NSLayoutConstraint.activate([
+            conclusionLabel.widthAnchor.constraint(equalToConstant: 450),
+            conclusionLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+            conclusionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         self.view = view
     }
@@ -1053,6 +1096,16 @@ class SelfAssessmentResultViewController: UIViewController {
             return 1
         } else {
             return 2
+        }
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == descriptions.testinfo_button1 {
+            self.navigationController?.pushViewController(TitleViewController(), animated: true)
+
+        } else {
+            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
         }
     }
 }
