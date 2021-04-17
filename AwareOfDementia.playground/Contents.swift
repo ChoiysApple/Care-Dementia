@@ -896,7 +896,7 @@ class SelfAssessmentViewController: UIViewController {
         self.title = "Self-Assessment Test"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         
-        let view = addScrollContentView(height: 2000)
+        let view = addScrollContentView(height: 960)
         scrollView.contentSize = view.frame.size
         scrollView.flashScrollIndicators()
         scrollView.backgroundColor = customColor.main
@@ -923,7 +923,7 @@ class SelfAssessmentViewController: UIViewController {
         
         for i in 0...questionList.count-1 {
             let newCheckbox = addCheckBox(questionList[i])
-            newCheckbox.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+            newCheckbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
             checkboxes.append(newCheckbox)
             view.addSubview(checkboxes[i])
             
@@ -948,6 +948,17 @@ class SelfAssessmentViewController: UIViewController {
             ])
         }
         
+        // Button
+        let nextButton = addButton(descriptions.self_button)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 400),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.topAnchor.constraint(equalTo: checkboxes[checkboxes.count-1].bottomAnchor, constant: 50),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
 
         
         scrollView.addSubview(view)
@@ -961,9 +972,27 @@ class SelfAssessmentViewController: UIViewController {
        }
     
     // Checkbox aciton
-    @objc func nextButtonTapped(_ sender: UIButton) {
+    @objc func checkboxTapped(_ sender: UIButton) {
         let selected = sender.isSelected
         sender.isSelected = !selected
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        self.navigationController?.pushViewController(SelfAssessmentViewController(), animated: true)
+    }
+}
+
+class SelfAssessmentResultViewController: UIViewController {
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        
+        let view = addView()
+        
+        let title = addHeading("Result")
+        view.addSubview(title)
+        
+        self.view = view
     }
 }
 

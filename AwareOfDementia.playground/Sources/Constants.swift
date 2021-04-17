@@ -68,6 +68,7 @@ public struct descriptions {
     public static let testinfo_button2 = "Start MMSE"
     
     public static let self_guide = "Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few months."
+    public static let self_button = "Finish test and check result"
 }
 
 public struct data {
