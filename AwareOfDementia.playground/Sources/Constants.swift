@@ -112,6 +112,13 @@ public struct data {
             "Do you struggle to remember to keep yourself clean or practice good hygiene?",
             "Have you or others noticed changes in your personality, such as becoming easily upset or anxious?"
         ]
+    
+    public struct MMSE_questions {
+        public static let time = ["What year is it this year?", "What season is it now?", "What's today's date?", "What day is it today?", "What month is it now?"]
+        public static let memory = ["I'll tell you the names of the three items. Listen until the end and name all three things.And in a few minutes, we'll ask you the names of those three objects again, so remember the names of the objects you've heard.", "Please tell me the names of the three items I told you to remember a while ago."]
+        public static let attention = ["How much is it if you subtract 7 from 100?", "much is it if I subtract 7 from there?"]
+        public static let name = "What is this called?"
+    }
 }
 
 public struct testData {

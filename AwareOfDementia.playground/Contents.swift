@@ -1233,8 +1233,6 @@ func addCheckBox(_ title: String) -> UIButton{
     button.titleLabel?.numberOfLines = 0
     button.contentHorizontalAlignment = .left
     button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-
-
     button.isSelected = false
     
     return button
