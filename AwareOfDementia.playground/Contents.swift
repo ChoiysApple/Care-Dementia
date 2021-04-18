@@ -1119,6 +1119,14 @@ class MMSEViewController: UIViewController {
         
         let view = addView()
         
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.tintColor = customColor.tint
+        self.navigationController?.navigationBar.backgroundColor = customColor.main
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.clipsToBounds = true
+        self.title = "Self-Assessment Test"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        
         // title
         let titleLabel = addHeading(descriptions.mmse_title)
         view.addSubview(titleLabel)
@@ -1205,14 +1213,168 @@ class MMSEViewController: UIViewController {
         self.view = view
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+
+           self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @objc func speechButtonTapped(_ sender: UIButton) {
-        print("Speech")
         textToSpeech(descriptions.mmse_guide)
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
+        
+        self.navigationController?.pushViewController(MMSETimeViewController(), animated: true)
+    }
+}
 
-        print("Next")
+class MMSETimeViewController: UIViewController {
+    
+    var currentQuestionCode = 0
+    let introductionLabel = addDescription("")
+    var answerButtons = [UIButton]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let view = addView()
+        
+        // title
+        let titleLabel = addHeading("Time Orientation")
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        introductionLabel.text = data.MMSE_questions.time[currentQuestionCode]
+        introductionLabel.font = UIFont(name: "AvenirNext-medium", size: 25)
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 400),
+            introductionLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
+        // Speech Symbol
+        let imageView = addSpeechImage()
+        view.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 100),
+            imageView.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 50)
+        ])
+        
+        // Speech Button
+        let speechButton = UIButton()
+        speechButton.translatesAutoresizingMaskIntoConstraints = false
+        speechButton.addTarget(self, action: #selector(speechButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(speechButton)
+        NSLayoutConstraint.activate([
+            speechButton.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+            speechButton.heightAnchor.constraint(equalTo: imageView.heightAnchor),
+            speechButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            speechButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+        ])
+        
+        // Button
+        let nextButton = addButton(descriptions.mmse_next)
+        nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        NSLayoutConstraint.activate([
+            nextButton.widthAnchor.constraint(equalToConstant: 400),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        for i in 0...3 {
+            let newAnswer = addAnswerButton(data.MMSE_questions.time_answer[currentQuestionCode][i])
+            newAnswer.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
+            answerButtons.append(newAnswer)
+            view.addSubview(answerButtons[i])
+            
+            var belowObject: UIView
+            var belowConstant: CGFloat
+            
+            // First checkbox
+            if i < 2 {
+                belowObject = nextButton
+                belowConstant = -50
+            } else {
+                belowObject = answerButtons[0]
+                belowConstant = -10
+            }
+            
+            if i % 2 == 0 {
+                NSLayoutConstraint.activate([
+                    answerButtons[i].widthAnchor.constraint(equalToConstant: 150),
+                    answerButtons[i].heightAnchor.constraint(equalToConstant: 50),
+                    answerButtons[i].bottomAnchor.constraint(equalTo: belowObject.topAnchor, constant: belowConstant),
+                    answerButtons[i].rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -10)
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    answerButtons[i].widthAnchor.constraint(equalToConstant: 150),
+                    answerButtons[i].heightAnchor.constraint(equalToConstant: 50),
+                    answerButtons[i].bottomAnchor.constraint(equalTo: belowObject.topAnchor, constant: belowConstant),
+                    answerButtons[i].leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 10)
+                ])
+            }
+        }
+        
+        
+
+
+        
+        self.view = view
+        
+    }
+    
+
+    
+    @objc func speechButtonTapped(_ sender: UIButton) {
+        textToSpeech(data.MMSE_questions.time[currentQuestionCode])
+    }
+    
+    @objc func answerButtonTapped(_ sender: UIButton) {
+        print("answer tapped")
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        if currentQuestionCode < data.MMSE_questions.time.count - 1 {
+            currentQuestionCode += 1
+            introductionLabel.text = data.MMSE_questions.time[currentQuestionCode]
+        } else {
+            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+        }
+    }
+    
+}
+
+class MMSEMemoryViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let view = addView()
+        
+        self.view = view
     }
 }
 
@@ -1335,6 +1497,22 @@ func addSpeechImage() -> UIImageView {
     
     return imageView
 }
+
+func addAnswerButton(_ answer: String) -> UIButton {
+    let button = UIButton()
+    button.layer.cornerRadius = 10
+    button.layer.borderColor = customColor.tint.cgColor
+    button.layer.borderWidth  = 1.0
+    button.backgroundColor = .white
+    button.titleLabel?.textAlignment = .center
+    button.setTitle(answer, for: .normal)
+    button.setTitleColor(.black, for: .normal)
+    button.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 25)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    
+    return button
+}
+
 
 // TTS method
 func textToSpeech(_ text: String){
