@@ -1242,7 +1242,7 @@ class MMSETimeViewController: UIViewController {
     let weekdayCode = Calendar.current.component(.weekday, from: Date())
     var weekDay = ""
     var season = ""
-
+    var time_answer = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -1261,7 +1261,7 @@ class MMSETimeViewController: UIViewController {
             randomWeekday = ["Sat", "Sun", "Mon", "Tue"]
         }
         
-        let time_answer = [
+        time_answer = [
             [String(year-1), String(year) , "2010", "2003"],
             ["Spring", "Summer", "Autumn", "Winter"],
             randomWeekday,
@@ -1325,7 +1325,6 @@ class MMSETimeViewController: UIViewController {
         // Button
         let nextButton = addButton(descriptions.mmse_next)
         nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
-        nextButton.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 400),
@@ -1333,6 +1332,8 @@ class MMSETimeViewController: UIViewController {
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        textToSpeech(data.MMSE_questions.time[currentQuestionCode])
         
         for i in 0...3 {
             let newAnswer = addAnswerButton(time_answer[currentQuestionCode][i])
@@ -1349,7 +1350,7 @@ class MMSETimeViewController: UIViewController {
                 belowConstant = -50
             } else {
                 belowObject = answerButtons[0]
-                belowConstant = -10
+                belowConstant = -20
             }
             
             if i % 2 == 0 {
@@ -1384,10 +1385,15 @@ class MMSETimeViewController: UIViewController {
     }
     
     @objc func answerButtonTapped(_ sender: UIButton) {
-        print("answer tapped")
-    }
-    
-    @objc func nextButtonTapped(_ sender: UIButton) {
+        if currentQuestionCode < data.MMSE_questions.time.count - 1 {
+            currentQuestionCode += 1
+            introductionLabel.text = data.MMSE_questions.time[currentQuestionCode]
+            for i in 0...3 {
+                answerButtons[i].setTitle(time_answer[currentQuestionCode][i], for: .normal)
+            }
+        } else {
+            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+        }
 
     }
     
