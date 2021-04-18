@@ -1235,8 +1235,39 @@ class MMSETimeViewController: UIViewController {
     let introductionLabel = addDescription("")
     var answerButtons = [UIButton]()
     
+    let year = Calendar.current.component(.year, from: Date())
+    let month = Calendar.current.component(.month, from: Date())
+    let day = Calendar.current.component(.day, from: Date())
+    let dayDay = ["","Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"]
+    let weekdayCode = Calendar.current.component(.weekday, from: Date())
+    var weekDay = ""
+    var season = ""
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weekDay = dayDay[weekdayCode]
+        season = getSeason(month)
+        
+        var randomWeekday = ["", "", "", ""]
+        if weekdayCode < 5 {
+            randomWeekday = [dayDay[weekdayCode], dayDay[weekdayCode+1], dayDay[weekdayCode+2], dayDay[weekdayCode+3]]
+        } else if weekdayCode == 5{
+            randomWeekday = ["Thr", "Fri", "Sat", "Sun"]
+        } else if weekdayCode == 6 {
+            randomWeekday = ["Fri", "Sat", "Sun", "Mon"]
+        } else if weekdayCode == 7 {
+            randomWeekday = ["Sat", "Sun", "Mon", "Tue"]
+        }
+        
+        let time_answer = [
+            [String(year-1), String(year) , "2010", "2003"],
+            ["Spring", "Summer", "Autumn", "Winter"],
+            randomWeekday,
+            [String(day-1), String(day),  String(day+1),  String(day+2)],
+            [String(month-1), String(month), String(month+1), String(month+2)]
+        ]
         
         let view = addView()
         
@@ -1298,13 +1329,13 @@ class MMSETimeViewController: UIViewController {
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 400),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.heightAnchor.constraint(equalToConstant: 0),
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         for i in 0...3 {
-            let newAnswer = addAnswerButton(data.MMSE_questions.time_answer[currentQuestionCode][i])
+            let newAnswer = addAnswerButton(time_answer[currentQuestionCode][i])
             newAnswer.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
             answerButtons.append(newAnswer)
             view.addSubview(answerButtons[i])
@@ -1357,11 +1388,18 @@ class MMSETimeViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        if currentQuestionCode < data.MMSE_questions.time.count - 1 {
-            currentQuestionCode += 1
-            introductionLabel.text = data.MMSE_questions.time[currentQuestionCode]
+
+    }
+    
+    public func getSeason(_ month: Int) -> String {
+        if [12, 1, 2].contains(month) {
+            return "Winter"
+        } else if [3, 4, 5].contains(month) {
+            return "Spring"
+        } else if [6, 7, 8].contains(month) {
+            return "Summer"
         } else {
-            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+            return "Autumn"
         }
     }
     
