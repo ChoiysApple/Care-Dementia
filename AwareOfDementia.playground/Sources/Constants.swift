@@ -14,9 +14,9 @@ public struct customColor {
 }
 
 public struct descriptions {
-    public static let title_heading = "You should Care Dementia!"
+    public static let title_heading = "You should be aware of Dementia!"
     public static let title_emoji = "🧑‍⚕️"
-    public static let title_button = "Start Caring Dementia"
+    public static let title_button = "Start learning Dementia"
     public static let title_skipButton = "I know Dementia. Bring me to test >"
     
     public static let introduction_title = "First, What is Dementia?"

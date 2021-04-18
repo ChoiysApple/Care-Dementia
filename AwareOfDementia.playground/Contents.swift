@@ -34,6 +34,7 @@ class TitleViewController: UIViewController {
 
         // title
         let titleLabel = addHeading(descriptions.title_heading)
+        titleLabel.font = UIFont(name: "AvenirNext-bold", size: 25)
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
