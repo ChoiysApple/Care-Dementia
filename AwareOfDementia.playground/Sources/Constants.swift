@@ -81,10 +81,18 @@ public struct descriptions {
     public static let selfresult_button2 = "Test Selection"
     
     public static let mmse_title = "Simplified MMSE Test"
-    public static let mmse_introduciton = "I'm going to ask you a few questions to learn about memory and concentration. Some of the questions are easy, but some may be difficult. You can do as much as you can."
+    public static let mmse_introduciton = "First stage of Dementia is first stage of Dementia is losing Time Orientation.So questions related to time orientation are prepared. Questions Some of the questions are easy, but some may be difficult. You can do as much as you can."
     public static let mmse_guide = "Every questions will spoken in voice.                       You can hear it again pressing button below"
     public static let mmse_button = "Start Test"
     public static let mmse_next = "Next"
+    
+    public static let mmseresult_title = "Result"
+    public static let mmseresult_emoji = ["✅", "⚠️", "‼️"]
+    public static let mmseresult_description = ["No loses of Time Orientaion ability", "Suspect mild loses of time orientaiton ability", "Suspect high loses of time orientation ability."]
+    public static let mmseresult_conclusion = ["Don't have to worry about dementia right now.", "Recommand to get a consultation on your current condition.", "Must get a consultation on your current condition."]
+    public static let mmseresult_button1 = "To title page"
+    public static let mmseresult_button2 = "Test Selection"
+
 }
 
 public struct data {
@@ -120,12 +128,7 @@ public struct data {
         ]
     
     public struct MMSE_questions {
-        
-        public static let time = ["What year is it this year?", "What season is it now?", "What's today's date?", "What day is it today?", "What month is it now?"]
-        public static let memory = ["I'll tell you the names of the three items. Listen until the end and name all three things.And in a few minutes, we'll ask you the names of those three objects again, so remember the names of the objects you've heard.", "Please tell me the names of the three items I told you to remember a while ago."]
-        public static let attention = ["How much is it if you subtract 7 from 100?", "much is it if I subtract 7 from there?"]
-        public static let name = "What is this called?"
-
+        public static let time = ["What year is it this year?", "What season is it now?", "What day is it today?", "What's today's date?",  "What month is it now?"]
     }
 }
 

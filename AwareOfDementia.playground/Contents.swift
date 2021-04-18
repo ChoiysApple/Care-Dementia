@@ -888,6 +888,8 @@ class SelfAssessmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        testData.testScore = 0
+        
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.tintColor = customColor.tint
         self.navigationController?.navigationBar.backgroundColor = customColor.main
@@ -1243,10 +1245,11 @@ class MMSETimeViewController: UIViewController {
     var weekDay = ""
     var season = ""
     var time_answer = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]]
-    
+    var answer = ["", "", "", ""]
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        testData.testScore = 0
         weekDay = dayDay[weekdayCode]
         season = getSeason(month)
         
@@ -1268,6 +1271,8 @@ class MMSETimeViewController: UIViewController {
             [String(day-1), String(day),  String(day+1),  String(day+2)],
             [String(month-1), String(month), String(month+1), String(month+2)]
         ]
+        
+        answer = [String(year), season, weekDay, String(day), String(month)]
         
         let view = addView()
         
@@ -1370,29 +1375,30 @@ class MMSETimeViewController: UIViewController {
             }
         }
         
-        
-
-
-        
         self.view = view
-        
     }
     
 
-    
     @objc func speechButtonTapped(_ sender: UIButton) {
         textToSpeech(data.MMSE_questions.time[currentQuestionCode])
     }
     
     @objc func answerButtonTapped(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == answer[currentQuestionCode] {
+            testData.testScore += 1
+        }
+        
         if currentQuestionCode < data.MMSE_questions.time.count - 1 {
             currentQuestionCode += 1
             introductionLabel.text = data.MMSE_questions.time[currentQuestionCode]
             for i in 0...3 {
                 answerButtons[i].setTitle(time_answer[currentQuestionCode][i], for: .normal)
             }
+            textToSpeech(data.MMSE_questions.time[currentQuestionCode])
+
         } else {
-            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+            self.navigationController?.pushViewController(MMSEResultViewController(), animated: true)
         }
 
     }
@@ -1411,16 +1417,119 @@ class MMSETimeViewController: UIViewController {
     
 }
 
-class MMSEMemoryViewController: UIViewController {
+class MMSEResultViewController: UIViewController {
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         let view = addView()
+        let resultCode = getResultCode(testData.testScore)
+        
+        // title
+        let titleLabel = addHeading(descriptions.mmseresult_title)
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: 400),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Divider
+        let divider = addDivider()
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalToConstant: 400),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            divider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // center Emoji
+        let centerEmoji = addEmoji(descriptions.mmseresult_emoji[resultCode], 130)
+        view.addSubview(centerEmoji)
+        NSLayoutConstraint.activate([
+            centerEmoji.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerEmoji.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 100)
+        ])
+        
+        // Description
+        let introductionLabel = addDescription("Your Score: \(testData.testScore) / 5")
+        introductionLabel.font = UIFont(name: "AvenirNext-bold", size: 30)
+        introductionLabel.textAlignment = .center
+        view.addSubview(introductionLabel)
+        NSLayoutConstraint.activate([
+            introductionLabel.widthAnchor.constraint(equalToConstant: 425),
+            introductionLabel.topAnchor.constraint(equalTo: centerEmoji.bottomAnchor, constant: 20),
+            introductionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Description
+        let descriptionLabel = addDescription(descriptions.mmseresult_description[resultCode])
+        descriptionLabel.textAlignment = .center
+        view.addSubview(descriptionLabel)
+        NSLayoutConstraint.activate([
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 400),
+            descriptionLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 20),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        let button1 = addButton(descriptions.selfresult_button1)
+        button1.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        button1.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: UIFont.labelFontSize)
+        view.addSubview(button1)
+        NSLayoutConstraint.activate([
+            button1.widthAnchor.constraint(equalToConstant: 200),
+            button1.heightAnchor.constraint(equalToConstant: 50),
+            button1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
+        ])
+        
+        let button2 = addButton(descriptions.selfresult_button2)
+        button2.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        button2.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: UIFont.labelFontSize)
+        view.addSubview(button2)
+        NSLayoutConstraint.activate([
+            button2.widthAnchor.constraint(equalToConstant: 200),
+            button2.heightAnchor.constraint(equalToConstant: 50),
+            button2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            button2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+        ])
+        
+        let conclusionLabel = addDescription(descriptions.mmseresult_conclusion[resultCode])
+        conclusionLabel.textAlignment = .center
+        if resultCode == 2 {
+            conclusionLabel.textColor = customColor.alertColor
+        }
+        conclusionLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
+        view.addSubview(conclusionLabel)
+        NSLayoutConstraint.activate([
+            conclusionLabel.widthAnchor.constraint(equalToConstant: 450),
+            conclusionLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
+            conclusionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
         self.view = view
     }
-}
+    
+    func getResultCode(_ score: Int) -> Int {
+        if score == 0{
+            return 2
+        } else if score >= 1 && score < 4 {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == descriptions.testinfo_button1 {
+            self.navigationController?.pushViewController(TitleViewController(), animated: true)
+
+        } else {
+            self.navigationController?.pushViewController(TestinfoViewController(), animated: true)
+        }
+    }}
 
 //Custom functions for UI
 func addView() -> UIView {
