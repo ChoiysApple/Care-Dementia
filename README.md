@@ -1,4 +1,4 @@
-# Care-Demantia
+# Care Demantia
 Simple interactive educational app with Swift Playgorunds
 
 </br>
