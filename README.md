@@ -16,11 +16,13 @@ Simple interactive educational app with Swift Playgorunds
 <img src="https://user-images.githubusercontent.com/43776784/154182134-65a7e43f-2a50-4f55-b161-00dcf7b57a44.png" width="19%" alt="this was image">
 <img src="https://user-images.githubusercontent.com/43776784/154182136-987f7bb4-92b5-44de-a948-ab2964611b8f.png" width="19%" alt="this was image">
 
+</br>
 
 ## Tech Stack
 - UIKit
 - Swift 5
 
+</br>
 
 ### Text to Speech 
 Used `AVFoundation`
@@ -34,11 +36,13 @@ Used `AVFoundation`
     synthesizer.speak(utterance)
 }
 ```
+</br>
 
 ## Design 
 - Main Font: `AvenirNext`
 - Background Color: `#colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)`
 - Tint Color: `#colorLiteral(red: 0.968627451, green: 0.9647058824, blue: 0.9529411765, alpha: 1)`
+</br>
 
 ## Information Sources
 - Introfuction: [Alzheimer's Disease International](https://www.alzint.org/about/)
