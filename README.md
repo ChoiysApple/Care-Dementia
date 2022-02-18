@@ -46,4 +46,4 @@ Used `AVFoundation`
 
 ## Information Sources
 - Introfuction: [Alzheimer's Disease International](https://www.alzint.org/about/)
-- Demetia Test: [MMSE](https://en.wikipedia.org/wiki/Mini–Mental_State_Examination) test, Self test - [Psycom](https://www.psycom.net/dementia-test/)
+- Demetia Test: [MMSE](https://en.wikipedia.org/wiki/Mini–Mental_State_Examination) test, Self Assessment - [Psycom](https://www.psycom.net/dementia-test/)
